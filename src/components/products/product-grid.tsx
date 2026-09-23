@@ -1,3 +1,5 @@
+"use client";
+
 import { ProductCard } from "@/components/products/product-card";
 import type { ProductCardData } from "@/types";
 import { cn } from "@/lib/utils";

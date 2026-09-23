@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: shopsphere
       POSTGRES_DB: shopsphere
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - shopsphere_pgdata:/var/lib/postgresql/data
     healthcheck:

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Store, Mail, Globe, Share2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
