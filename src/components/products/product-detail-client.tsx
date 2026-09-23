@@ -188,27 +188,15 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
           )}
         </div>
 
-        {product.seller && (
-          <div className="mt-5 flex items-center gap-3 rounded-xl border border-border/70 bg-muted/30 p-3">
-            <span className="flex size-10 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-              {product.seller.logo ? (
-                <Image
-                  src={product.seller.logo}
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="size-10 rounded-lg object-cover"
-                />
-              ) : (
-                <Store className="size-5" />
-              )}
-            </span>
-            <div className="min-w-0">
-              <p className="text-xs text-muted-foreground">Sold by</p>
-              <p className="truncate font-medium">{product.seller.storeName}</p>
-            </div>
+        <div className="mt-5 flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-3">
+          <span className="flex size-10 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <Store className="size-5" />
+          </span>
+          <div className="min-w-0">
+            <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">Africhina Direct</p>
+            <p className="truncate text-xs text-muted-foreground">Inspected & dispatched via Africhina supply network</p>
           </div>
-        )}
+        </div>
 
         <p className="mt-6 leading-relaxed text-muted-foreground">
           {product.description}

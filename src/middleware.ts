@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 import {
   canAccessAdmin,
-  canAccessSeller,
+  canAccessStaff,
   getDashboardPath,
 } from "@/lib/rbac";
 
@@ -46,12 +46,20 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  // Seller area (exclude public seller-register)
-  if (pathname.startsWith("/seller") && pathname !== "/seller-register") {
+  // Legacy /seller routes — forward to /staff or /register
+  if (pathname.startsWith("/seller")) {
+    const target = pathname.startsWith("/seller-register")
+      ? "/register"
+      : pathname.replace(/^\/seller/, "/staff");
+    return NextResponse.redirect(new URL(target, request.url));
+  }
+
+  // Staff area
+  if (pathname.startsWith("/staff")) {
     if (!isAuth) {
       return NextResponse.redirect(loginUrl(request, pathname));
     }
-    if (!canAccessSeller(role)) {
+    if (!canAccessStaff(role)) {
       return NextResponse.redirect(new URL("/", request.url));
     }
     return NextResponse.next();
@@ -85,6 +93,7 @@ export const config = {
     "/register",
     "/dashboard",
     "/dashboard/:path*",
+    "/staff/:path*",
     "/seller/:path*",
     "/admin/:path*",
     "/checkout",

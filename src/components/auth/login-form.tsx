@@ -63,7 +63,7 @@ export function LoginForm({ callbackUrl }: LoginFormProps) {
       <CardHeader className="text-center">
         <CardTitle className="font-heading text-2xl">Welcome back</CardTitle>
         <CardDescription>
-          Sign in to your ShopSphere Pro account
+          Sign in to your Africhina Connect account
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -111,8 +111,12 @@ export function LoginForm({ callbackUrl }: LoginFormProps) {
 
           <div className="rounded-xl border border-border/60 bg-muted/40 p-3 text-xs text-muted-foreground">
             <p className="mb-1 font-medium text-foreground">Demo accounts</p>
-            <p>admin@shopsphere.com · seller@shopsphere.com · customer@shopsphere.com</p>
-            <p className="mt-1">Password: password123</p>
+            <p className="space-y-0.5">
+              <span><strong>Super Admin:</strong> admin@shopsphere.com</span><br/>
+              <span><strong>Staff:</strong> seller@shopsphere.com</span><br/>
+              <span><strong>Customer:</strong> customer@shopsphere.com</span>
+            </p>
+            <p className="mt-1.5 text-foreground/80 font-mono">Password: password123</p>
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4 border-t-0 bg-transparent">

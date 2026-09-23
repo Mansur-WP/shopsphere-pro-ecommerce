@@ -6,19 +6,18 @@ import { ProductGrid } from "@/components/products/product-grid";
 import { HeroSection } from "@/components/home/hero-section";
 import { CategoryCard } from "@/components/home/category-card";
 import { WhyChooseSection } from "@/components/home/why-choose-section";
-import { SellerCtaSection } from "@/components/home/seller-cta-section";
 import { NewsletterSection } from "@/components/home/newsletter-section";
 import { getFeaturedProducts } from "@/actions/products";
 import { getCategories } from "@/actions/categories";
 
 export const metadata = {
-  title: "ShopSphere Pro — Premium Multi-Vendor Marketplace",
+  title: "Africhina Connect — Premium Africa-China Commerce & Trade",
   description:
-    "Discover curated products from verified sellers. Secure checkout, fast shipping, and a modern shopping experience.",
+    "Direct Africa-China trade, verified quality goods, secure payments, and reliable cross-border logistics.",
   openGraph: {
-    title: "ShopSphere Pro",
+    title: "Africhina Connect",
     description:
-      "Premium multi-vendor marketplace for buyers and sellers who care about quality.",
+      "Premium commerce platform connecting African businesses and consumers directly to verified Chinese manufacturing and products.",
     type: "website",
   },
 };
@@ -47,7 +46,7 @@ export default async function HomePage() {
               Featured products
             </h2>
             <p className="mt-2 text-muted-foreground">
-              Hand-picked selections from top sellers this week.
+              Hand-picked selections and verified direct inventory.
             </p>
           </div>
           <Link href="/products">
@@ -96,7 +95,6 @@ export default async function HomePage() {
       </section>
 
       <WhyChooseSection />
-      <SellerCtaSection />
       <NewsletterSection />
     </>
   );

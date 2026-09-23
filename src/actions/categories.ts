@@ -86,7 +86,7 @@ export async function getCategoryBySlug(slug: string) {
 
 export async function createCategory(raw: unknown): Promise<ActionResult<{ id: string; slug: string }>> {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return { success: false, error: "Unauthorized" };
   }
@@ -136,7 +136,7 @@ export async function updateCategory(
   raw: unknown
 ): Promise<ActionResult> {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return { success: false, error: "Unauthorized" };
   }
@@ -191,7 +191,7 @@ export async function updateCategory(
 
 export async function deleteCategory(id: string): Promise<ActionResult> {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return { success: false, error: "Unauthorized" };
   }

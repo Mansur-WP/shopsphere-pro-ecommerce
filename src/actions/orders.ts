@@ -359,10 +359,11 @@ export async function getOrderById(orderId: string) {
   if (!order) return null;
 
   const isOwner = order.userId === session.user.id;
-  const isAdmin = session.user.role === "ADMIN";
+  const isAdmin =
+    session.user.role === "SUPER_ADMIN" || session.user.role === "ADMIN";
 
   if (!isOwner && !isAdmin) {
-    if (session.user.role === "SELLER") {
+    if (session.user.role === "STAFF" || session.user.role === "SELLER") {
       const seller = await prisma.sellerProfile.findUnique({
         where: { userId: session.user.id },
       });
@@ -383,7 +384,7 @@ export async function updateOrderStatus(
   status: OrderStatus
 ): Promise<ActionResult> {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return { success: false, error: "Unauthorized" };
   }

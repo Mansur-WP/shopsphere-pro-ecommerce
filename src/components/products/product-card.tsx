@@ -107,11 +107,9 @@ export function ProductCard({ product, className }: ProductCardProps) {
             {product.name}
           </h3>
         </Link>
-        {product.seller && (
-          <p className="truncate text-xs text-muted-foreground">
-            by {product.seller.storeName}
-          </p>
-        )}
+        <p className="truncate text-xs text-emerald-600/80 dark:text-emerald-400/80">
+          Africhina Direct
+        </p>
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <Star className="size-3.5 fill-amber-400 text-amber-400" />
           <span>{product.ratingAvg.toFixed(1)}</span>

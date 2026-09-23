@@ -7,7 +7,7 @@ import type { OrderStatus, Role, SellerStatus } from "@prisma/client";
 
 export async function getAdminStats() {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return null;
   }
@@ -54,7 +54,7 @@ export async function getUsers(
   role?: Role
 ) {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return null;
   }
@@ -122,7 +122,7 @@ export async function updateUserRole(
   role: Role
 ): Promise<ActionResult> {
   try {
-    const session = await requireRole(["ADMIN"]);
+    const session = await requireRole(["SUPER_ADMIN", "ADMIN"]);
     if (session.user.id === userId) {
       return { success: false, error: "You cannot change your own role" };
     }
@@ -145,7 +145,7 @@ export async function updateUserRole(
 
 export async function deleteUser(userId: string): Promise<ActionResult> {
   try {
-    const session = await requireRole(["ADMIN"]);
+    const session = await requireRole(["SUPER_ADMIN", "ADMIN"]);
     if (session.user.id === userId) {
       return { success: false, error: "You cannot delete your own account" };
     }
@@ -165,7 +165,7 @@ export async function deleteUser(userId: string): Promise<ActionResult> {
 
 export async function getPendingSellers() {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return [];
   }
@@ -199,7 +199,7 @@ export async function getPendingSellers() {
 
 export async function getAllSellers(status?: SellerStatus) {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return [];
   }
@@ -231,7 +231,7 @@ export async function getAllSellers(status?: SellerStatus) {
 
 export async function getSellerById(sellerId: string) {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return null;
   }
@@ -296,7 +296,7 @@ async function updateSellerStatus(
   status: SellerStatus
 ): Promise<ActionResult> {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return { success: false, error: "Unauthorized" };
   }
@@ -363,7 +363,7 @@ export async function suspendSeller(sellerId: string): Promise<ActionResult> {
 
 export async function getAdminProducts(page = 1, limit = 20, search?: string) {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return null;
   }
@@ -423,7 +423,7 @@ export async function toggleProductPublished(
   published?: boolean
 ): Promise<ActionResult> {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return { success: false, error: "Unauthorized" };
   }
@@ -446,7 +446,7 @@ export async function toggleProductPublished(
 
 export async function getAdminOrders(page = 1, limit = 20, status?: OrderStatus) {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return null;
   }
@@ -511,7 +511,7 @@ export async function updateAdminOrderStatus(
   status: OrderStatus
 ): Promise<ActionResult> {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return { success: false, error: "Unauthorized" };
   }
@@ -552,7 +552,7 @@ export async function updateAdminOrderStatus(
 
 export async function getPlatformAnalytics(days = 30) {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return null;
   }
@@ -677,7 +677,7 @@ export async function setUserActive(
   isActive: boolean
 ): Promise<ActionResult> {
   try {
-    const session = await requireRole(["ADMIN"]);
+    const session = await requireRole(["SUPER_ADMIN", "ADMIN"]);
     if (session.user.id === userId) {
       return { success: false, error: "You cannot deactivate your own account" };
     }
@@ -705,7 +705,7 @@ export async function deleteAdminProduct(
   productId: string
 ): Promise<ActionResult> {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return { success: false, error: "Unauthorized" };
   }
@@ -721,7 +721,7 @@ export async function deleteAdminProduct(
 
 export async function getAdminRecentActivity(limit = 8) {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return [];
   }
@@ -815,3 +815,72 @@ export async function getAdminRecentActivity(limit = 8) {
     )
     .slice(0, limit);
 }
+
+export async function getAdminStaff(page = 1, limit = 20, search?: string) {
+  try {
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
+  } catch {
+    return null;
+  }
+
+  const safePage = Math.max(1, page);
+  const safeLimit = Math.min(50, Math.max(1, limit));
+  const skip = (safePage - 1) * safeLimit;
+
+  const where = {
+    role: { in: ["STAFF" as Role, "SELLER" as Role] },
+    ...(search?.trim()
+      ? {
+          OR: [
+            { name: { contains: search.trim(), mode: "insensitive" as const } },
+            { email: { contains: search.trim(), mode: "insensitive" as const } },
+          ],
+        }
+      : {}),
+  };
+
+  const [staffUsers, total] = await Promise.all([
+    prisma.user.findMany({
+      where,
+      include: {
+        sellerProfile: {
+          include: {
+            _count: { select: { products: true } },
+          },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+      skip,
+      take: safeLimit,
+    }),
+    prisma.user.count({ where }),
+  ]);
+
+  return {
+    staff: staffUsers.map((u) => ({
+      id: u.id,
+      name: u.name,
+      email: u.email,
+      role: u.role,
+      isActive: u.isActive,
+      createdAt: u.createdAt.toISOString(),
+      profile: u.sellerProfile
+        ? {
+            id: u.sellerProfile.id,
+            storeName: u.sellerProfile.storeName,
+            storeSlug: u.sellerProfile.storeSlug,
+            status: u.sellerProfile.status,
+            totalSales: toNumber(u.sellerProfile.totalSales),
+            productCount: u.sellerProfile._count.products,
+          }
+        : null,
+    })),
+    pagination: {
+      page: safePage,
+      limit: safeLimit,
+      total,
+      totalPages: Math.ceil(total / safeLimit) || 1,
+    },
+  };
+}
+

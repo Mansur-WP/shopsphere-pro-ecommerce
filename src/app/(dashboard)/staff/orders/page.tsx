@@ -1,12 +1,12 @@
-import { OrderTable } from "@/components/sellers/order-table";
-import { getSellerOrders } from "@/actions/seller";
+import { OrderTable } from "@/components/staff/order-table";
+import { getStaffOrders } from "@/actions/staff";
 
 export const metadata = {
-  title: "Seller Orders",
+  title: "Staff Orders",
 };
 
-export default async function SellerOrdersPage() {
-  const data = await getSellerOrders(1, 50);
+export default async function StaffOrdersPage() {
+  const data = await getStaffOrders(1, 50);
   const orders = data?.orders ?? [];
 
   return (
@@ -16,8 +16,7 @@ export default async function SellerOrdersPage() {
           Orders
         </h2>
         <p className="text-muted-foreground">
-          Incoming orders containing your products. Update fulfillment status as
-          you ship.
+          Operational orders for Africhina products. Update fulfillment status as items are processed and dispatched.
         </p>
       </div>
       <OrderTable orders={orders} />

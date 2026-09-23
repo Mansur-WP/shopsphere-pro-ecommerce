@@ -10,7 +10,7 @@ export default function AdminLayout({
 }) {
   return (
     <RequireAuth
-      roles={["ADMIN"]}
+      roles={["SUPER_ADMIN", "ADMIN"]}
       loginRedirect="/login?callbackUrl=/admin/dashboard"
       forbiddenRedirect="/"
     >

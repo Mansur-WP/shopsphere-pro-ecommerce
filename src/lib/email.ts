@@ -57,11 +57,11 @@ function layout(title: string, body: string) {
 export async function sendWelcomeEmail(to: string, name?: string | null) {
   return sendEmail({
     to,
-    subject: "Welcome to ShopSphere Pro",
+    subject: "Welcome to Africhina Connect",
     html: layout(
       `Welcome${name ? `, ${name}` : ""}!`,
-      `<p>Your account is ready. Browse curated products from trusted sellers, save favorites, and checkout securely.</p>
-       <p>Happy shopping.</p>`
+      `<p>Your account is ready. Explore quality trade and consumer goods, save favorites, and checkout securely.</p>
+       <p>Welcome aboard.</p>`
     ),
   });
 }
@@ -96,7 +96,7 @@ export async function sendPaymentSuccessEmail(options: {
     subject: `Payment received · ${options.orderNumber}`,
     html: layout(
       "Payment successful",
-      `<p>Payment for order <strong>${options.orderNumber}</strong> (${options.total}) was successful. Sellers are preparing your items.</p>
+      `<p>Payment for order <strong>${options.orderNumber}</strong> (${options.total}) was successful. Our fulfillment team is preparing your items.</p>
        <p><a href="${appUrl}/orders/${options.orderId}" style="color:#34d399;">Track your order</a></p>`
     ),
   });
@@ -111,11 +111,11 @@ export async function sendSellerApprovalEmail(options: {
   if (options.approved) {
     return sendEmail({
       to: options.to,
-      subject: `Store approved · ${options.storeName}`,
+      subject: `Account approved · ${options.storeName}`,
       html: layout(
         "You're approved!",
-        `<p>Congratulations — <strong>${options.storeName}</strong> is live on ShopSphere Pro.</p>
-         <p><a href="${appUrl}/seller/dashboard" style="color:#34d399;">Open seller dashboard</a></p>`
+        `<p>Congratulations — <strong>${options.storeName}</strong> is active on Africhina Connect.</p>
+         <p><a href="${appUrl}/staff/dashboard" style="color:#34d399;">Open staff dashboard</a></p>`
       ),
     });
   }

@@ -18,11 +18,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ImageUploader } from "@/components/sellers/image-uploader";
+import { ImageUploader } from "@/components/staff/image-uploader";
 import {
-  createSellerProduct,
-  updateSellerProduct,
-} from "@/actions/seller";
+  createStaffProduct,
+  updateStaffProduct,
+} from "@/actions/staff";
 import { productSchema, type ProductInput } from "@/lib/validations";
 
 interface CategoryOption {
@@ -83,12 +83,12 @@ export function ProductForm({
 
       const result =
         mode === "create"
-          ? await createSellerProduct(payload)
-          : await updateSellerProduct(productId!, payload);
+          ? await createStaffProduct(payload)
+          : await updateStaffProduct(productId!, payload);
 
       if (result.success) {
-        toast.success(result.message ?? "Saved");
-        router.push("/seller/products");
+        toast.success(result.message ?? "Saved successfully");
+        router.push("/staff/products");
         router.refresh();
       } else {
         toast.error(result.error);
@@ -100,7 +100,7 @@ export function ProductForm({
     <Card className="border-border/70">
       <CardHeader>
         <CardTitle className="font-heading">
-          {mode === "create" ? "Product details" : "Edit listing"}
+          {mode === "create" ? "Product details" : "Edit product"}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -266,7 +266,7 @@ export function ProductForm({
               type="button"
               variant="outline"
               className="rounded-xl"
-              onClick={() => router.push("/seller/products")}
+              onClick={() => router.push("/staff/products")}
             >
               Cancel
             </Button>

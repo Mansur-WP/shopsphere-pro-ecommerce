@@ -2,16 +2,20 @@ import type { Role } from "@prisma/client";
 
 export const ROLES = {
   CUSTOMER: "CUSTOMER",
-  SELLER: "SELLER",
+  STAFF: "STAFF",
+  SUPER_ADMIN: "SUPER_ADMIN",
   ADMIN: "ADMIN",
+  SELLER: "SELLER",
 } as const satisfies Record<Role, Role>;
 
 export function getDashboardPath(role: Role | string | undefined): string {
   switch (role) {
+    case "SUPER_ADMIN":
     case "ADMIN":
       return "/admin/dashboard";
+    case "STAFF":
     case "SELLER":
-      return "/seller/dashboard";
+      return "/staff/dashboard";
     default:
       return "/profile";
   }
@@ -27,12 +31,22 @@ export function getPostLoginRedirect(
   return getDashboardPath(role);
 }
 
-export function canAccessSeller(role: Role | string | undefined): boolean {
-  return role === "SELLER" || role === "ADMIN";
+export function canAccessStaff(role: Role | string | undefined): boolean {
+  return (
+    role === "STAFF" ||
+    role === "SUPER_ADMIN" ||
+    role === "ADMIN" ||
+    role === "SELLER"
+  );
 }
 
 export function canAccessAdmin(role: Role | string | undefined): boolean {
-  return role === "ADMIN";
+  return role === "SUPER_ADMIN" || role === "ADMIN";
+}
+
+/** Backward compatibility alias for canAccessStaff */
+export function canAccessSeller(role: Role | string | undefined): boolean {
+  return canAccessStaff(role);
 }
 
 export function hasRole(

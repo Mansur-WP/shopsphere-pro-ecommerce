@@ -35,11 +35,11 @@ export default async function AdminDashboardPage() {
           href: "/admin/users",
         },
         {
-          label: "Sellers",
+          label: "Staff",
           value: stats.totalSellers,
-          description: `${stats.pendingSellers} pending`,
-          icon: "store" as const,
-          href: "/admin/sellers",
+          description: `${stats.pendingSellers} pending activation`,
+          icon: "users" as const,
+          href: "/admin/staff",
         },
         {
           label: "Products",
@@ -63,11 +63,11 @@ export default async function AdminDashboardPage() {
           href: "/admin/analytics",
         },
         {
-          label: "Pending sellers",
+          label: "Staff applications",
           value: stats.pendingSellers,
-          description: "Awaiting review",
+          description: "Awaiting activation",
           icon: "clock" as const,
-          href: "/admin/sellers?status=PENDING",
+          href: "/admin/staff",
         },
       ]
     : [];

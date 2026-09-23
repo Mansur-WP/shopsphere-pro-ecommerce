@@ -1,4 +1,4 @@
-import { ProductForm } from "@/components/sellers/product-form";
+import { ProductForm } from "@/components/staff/product-form";
 import { getCategories } from "@/actions/categories";
 
 export const metadata = {
@@ -15,7 +15,7 @@ export default async function NewProductPage() {
           New product
         </h2>
         <p className="text-muted-foreground">
-          Add a listing to your store catalog.
+          Add a listing to the Africhina catalog.
         </p>
       </div>
       <ProductForm

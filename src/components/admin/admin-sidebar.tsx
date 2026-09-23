@@ -3,7 +3,7 @@ import { DashboardShell } from "@/components/layout/dashboard-shell";
 const adminNav = [
   { href: "/admin/dashboard", label: "Dashboard", icon: "dashboard" },
   { href: "/admin/users", label: "Users", icon: "users" },
-  { href: "/admin/sellers", label: "Sellers", icon: "store" },
+  { href: "/admin/staff", label: "Staff", icon: "users" },
   { href: "/admin/products", label: "Products", icon: "package" },
   { href: "/admin/categories", label: "Categories", icon: "categories" },
   { href: "/admin/orders", label: "Orders", icon: "orders" },

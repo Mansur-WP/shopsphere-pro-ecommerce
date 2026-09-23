@@ -171,7 +171,7 @@ async function main() {
       name: "Pending QA Seller",
       email: pendingEmail,
       password: pwd,
-      role: "SELLER",
+      role: "STAFF",
       sellerProfile: {
         create: {
           storeName: "QA Pending Store",

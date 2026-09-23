@@ -1,23 +1,20 @@
 import { getCurrentUser } from "@/lib/helpers";
-import { SellerStoreForm } from "./store-form";
+import { StaffStoreForm } from "./store-form";
 
-export default async function SellerStorePage() {
+export default async function StaffStorePage() {
   const user = await getCurrentUser();
   const store = user?.sellerProfile;
 
   if (!store) {
     return (
       <div className="text-muted-foreground">
-        No seller profile found.{" "}
-        <a href="/seller-register" className="text-emerald-600 hover:underline">
-          Apply to sell
-        </a>
+        No operational store profile found for this staff account.
       </div>
     );
   }
 
   return (
-    <SellerStoreForm
+    <StaffStoreForm
       store={{
         storeName: store.storeName,
         description: store.description,

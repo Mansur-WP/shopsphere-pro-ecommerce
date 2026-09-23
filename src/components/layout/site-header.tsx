@@ -25,7 +25,6 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { href: "/products", label: "Shop" },
   { href: "/categories", label: "Categories" },
-  { href: "/seller-register", label: "Sell on ShopSphere" },
 ];
 
 export function SiteHeader() {
@@ -45,7 +44,7 @@ export function SiteHeader() {
             <Store className="size-4" />
           </span>
           <span className="font-heading text-lg font-semibold tracking-tight">
-            ShopSphere<span className="text-emerald-600 dark:text-emerald-400"> Pro</span>
+            Africhina<span className="text-emerald-600 dark:text-emerald-400"> Connect</span>
           </span>
         </Link>
 

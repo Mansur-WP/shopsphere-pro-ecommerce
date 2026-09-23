@@ -11,7 +11,6 @@ const footerLinks = {
     { href: "/wishlist", label: "Wishlist" },
   ],
   Company: [
-    { href: "/seller-register", label: "Become a Seller" },
     { href: "/login", label: "Sign In" },
     { href: "/register", label: "Create Account" },
   ],
@@ -33,17 +32,17 @@ export function SiteFooter() {
                 <Store className="size-4" />
               </span>
               <span className="font-heading text-lg font-semibold tracking-tight">
-                ShopSphere
-                <span className="text-emerald-600 dark:text-emerald-400"> Pro</span>
+                Africhina
+                <span className="text-emerald-600 dark:text-emerald-400"> Connect</span>
               </span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Premium multi-vendor marketplace. Discover curated products from
-              trusted sellers with seamless checkout and fast delivery.
+              Direct Africa-China trade and consumer commerce. Verified goods,
+              cross-border logistics, and trusted transactions.
             </p>
             <div className="mt-6 flex items-center gap-3">
               <a
-                href="mailto:hello@shopsphere.pro"
+                href="mailto:contact@africhinaconnect.com"
                 className="flex size-9 items-center justify-center rounded-lg border border-border/70 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 aria-label="Email"
               >
@@ -89,7 +88,7 @@ export function SiteFooter() {
 
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} ShopSphere Pro. All rights reserved.
+            © {new Date().getFullYear()} Africhina Connect. All rights reserved.
           </p>
           <div className="flex gap-6 text-xs text-muted-foreground">
             <Link href="#" className="hover:text-foreground">

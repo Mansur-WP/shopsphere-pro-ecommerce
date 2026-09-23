@@ -16,10 +16,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { deleteSellerProduct } from "@/actions/seller";
+import { deleteStaffProduct } from "@/actions/staff";
 import { formatCurrency } from "@/lib/format";
 
-export interface SellerProductRow {
+export interface StaffProductRow {
   id: string;
   name: string;
   price: number;
@@ -31,7 +31,7 @@ export interface SellerProductRow {
 }
 
 interface ProductTableProps {
-  products: SellerProductRow[];
+  products: StaffProductRow[];
 }
 
 export function ProductTable({ products }: ProductTableProps) {
@@ -41,9 +41,9 @@ export function ProductTable({ products }: ProductTableProps) {
   function handleDelete(id: string, name: string) {
     if (!confirm(`Delete “${name}”? This cannot be undone.`)) return;
     startTransition(async () => {
-      const result = await deleteSellerProduct(id);
+      const result = await deleteStaffProduct(id);
       if (result.success) {
-        toast.success("Product deleted");
+        toast.success("Product deleted successfully");
         router.refresh();
       } else {
         toast.error(result.error);
@@ -55,8 +55,8 @@ export function ProductTable({ products }: ProductTableProps) {
     return (
       <div className="rounded-2xl border border-dashed border-border/70 p-12 text-center">
         <p className="text-muted-foreground">No products yet.</p>
-        <Link href="/seller/products/new" className="mt-4 inline-block">
-          <Button className="rounded-xl">Create your first listing</Button>
+        <Link href="/staff/products/new" className="mt-4 inline-block">
+          <Button className="rounded-xl">Create product listing</Button>
         </Link>
       </div>
     );
@@ -121,7 +121,7 @@ export function ProductTable({ products }: ProductTableProps) {
               </TableCell>
               <TableCell>
                 <div className="flex justify-end gap-1">
-                  <Link href={`/seller/products/${product.id}/edit`}>
+                  <Link href={`/staff/products/${product.id}/edit`}>
                     <Button variant="ghost" size="icon-sm" aria-label="Edit">
                       <Pencil className="size-4" />
                     </Button>

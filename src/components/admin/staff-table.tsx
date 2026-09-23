@@ -3,7 +3,7 @@
 import { useTransition } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { format } from "date-fns";
-import { Search, UserCheck, UserX } from "lucide-react";
+import { UserCheck, UserX } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -24,43 +24,43 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { setUserActive, updateUserRole } from "@/actions/admin";
+import { formatCurrency } from "@/lib/format";
 import type { Role } from "@prisma/client";
 
-export interface AdminUserRow {
+export interface AdminStaffRow {
   id: string;
   name: string | null;
   email: string;
   role: Role | string;
   isActive: boolean;
-  image: string | null;
   createdAt: string;
-  sellerProfile: {
+  profile: {
     id: string;
     storeName: string;
+    storeSlug: string;
     status: string;
+    totalSales: number;
+    productCount: number;
   } | null;
-  orderCount: number;
 }
 
-interface UserTableProps {
-  users: AdminUserRow[];
+interface StaffTableProps {
+  staff: AdminStaffRow[];
+  currentSearch?: string;
   pagination?: {
     page: number;
     totalPages: number;
     total: number;
   };
-  currentSearch?: string;
-  currentRole?: string;
 }
 
-const ROLES: Role[] = ["CUSTOMER", "STAFF", "SUPER_ADMIN", "ADMIN"];
+const AVAILABLE_ROLES: Role[] = ["STAFF", "SUPER_ADMIN", "CUSTOMER", "ADMIN"];
 
-export function UserTable({
-  users,
-  pagination,
+export function StaffTable({
+  staff,
   currentSearch = "",
-  currentRole = "",
-}: UserTableProps) {
+  pagination,
+}: StaffTableProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -69,17 +69,17 @@ export function UserTable({
   function updateQuery(updates: Record<string, string | undefined>) {
     const params = new URLSearchParams(searchParams.toString());
     for (const [key, value] of Object.entries(updates)) {
-      if (!value || value === "ALL") params.delete(key);
+      if (!value) params.delete(key);
       else params.set(key, value);
     }
-    if ("q" in updates || "role" in updates) params.delete("page");
+    if ("q" in updates) params.delete("page");
     router.push(`${pathname}?${params.toString()}`);
   }
 
-  function handleRoleChange(userId: string, role: string | null) {
-    if (!role) return;
+  function handleRoleChange(userId: string, newRole: string | null) {
+    if (!newRole) return;
     startTransition(async () => {
-      const result = await updateUserRole(userId, role as Role);
+      const result = await updateUserRole(userId, newRole as Role);
       if (result.success) {
         toast.success(result.message ?? "Role updated");
         router.refresh();
@@ -112,76 +112,68 @@ export function UserTable({
             updateQuery({ q: String(fd.get("q") || "") });
           }}
         >
-          <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             name="q"
             defaultValue={currentSearch}
-            placeholder="Search by name or email…"
-            className="rounded-xl pl-9"
+            placeholder="Search staff by name or email…"
+            className="rounded-xl"
           />
         </form>
-        <Select
-          value={currentRole || "ALL"}
-          onValueChange={(v) => updateQuery({ role: v ?? undefined })}
-        >
-          <SelectTrigger className="w-full rounded-xl sm:w-[160px]">
-            <SelectValue placeholder="All roles" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="ALL">All roles</SelectItem>
-            {ROLES.map((role) => (
-              <SelectItem key={role} value={role}>
-                {role}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
       </div>
 
-      {!users.length ? (
+      {!staff.length ? (
         <div className="rounded-2xl border border-dashed border-border/70 p-12 text-center text-muted-foreground">
-          No users match your filters.
+          No staff members found.
         </div>
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-border/70">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>User</TableHead>
+                <TableHead>Staff Member</TableHead>
+                <TableHead>Branch / Store</TableHead>
                 <TableHead>Role</TableHead>
-                <TableHead>Orders</TableHead>
+                <TableHead>Products</TableHead>
+                <TableHead>Sales</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Joined</TableHead>
-                <TableHead className="w-[120px]" />
+                <TableHead className="w-[140px]" />
               </TableRow>
             </TableHeader>
             <TableBody>
-              {users.map((user) => (
-                <TableRow key={user.id}>
+              {staff.map((member) => (
+                <TableRow key={member.id}>
                   <TableCell>
                     <div>
-                      <p className="font-medium">{user.name ?? "—"}</p>
+                      <p className="font-medium">{member.name ?? "—"}</p>
                       <p className="text-xs text-muted-foreground">
-                        {user.email}
+                        {member.email}
                       </p>
-                      {user.sellerProfile && (
-                        <p className="text-xs text-emerald-600 dark:text-emerald-400">
-                          Store · {user.sellerProfile.storeName}
-                        </p>
-                      )}
                     </div>
                   </TableCell>
                   <TableCell>
+                    {member.profile ? (
+                      <div>
+                        <p className="font-medium">{member.profile.storeName}</p>
+                        <p className="text-xs text-muted-foreground">
+                          /{member.profile.storeSlug}
+                        </p>
+                      </div>
+                    ) : (
+                      <span className="text-muted-foreground text-xs">General Operations</span>
+                    )}
+                  </TableCell>
+                  <TableCell>
                     <Select
-                      value={user.role as string}
-                      onValueChange={(v) => handleRoleChange(user.id, v)}
+                      value={member.role as string}
+                      onValueChange={(v) => handleRoleChange(member.id, v)}
                       disabled={pending}
                     >
                       <SelectTrigger className="h-8 w-[130px] rounded-lg">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        {ROLES.map((role) => (
+                        {AVAILABLE_ROLES.map((role) => (
                           <SelectItem key={role} value={role}>
                             {role}
                           </SelectItem>
@@ -189,37 +181,42 @@ export function UserTable({
                       </SelectContent>
                     </Select>
                   </TableCell>
-                  <TableCell>{user.orderCount}</TableCell>
+                  <TableCell>{member.profile?.productCount ?? 0}</TableCell>
                   <TableCell>
-                    <Badge variant={user.isActive ? "default" : "secondary"}>
-                      {user.isActive ? "Active" : "Disabled"}
+                    {formatCurrency(member.profile?.totalSales ?? 0)}
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={member.isActive ? "default" : "secondary"}>
+                      {member.isActive ? "Active" : "Disabled"}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {format(new Date(user.createdAt), "MMM d, yyyy")}
+                    {format(new Date(member.createdAt), "MMM d, yyyy")}
                   </TableCell>
                   <TableCell>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="rounded-lg"
-                      disabled={pending}
-                      onClick={() =>
-                        handleToggleActive(user.id, !user.isActive)
-                      }
-                    >
-                      {user.isActive ? (
-                        <>
-                          <UserX className="mr-1 size-3.5" />
-                          Disable
-                        </>
-                      ) : (
-                        <>
-                          <UserCheck className="mr-1 size-3.5" />
-                          Activate
-                        </>
-                      )}
-                    </Button>
+                    <div className="flex justify-end gap-1">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="rounded-lg"
+                        disabled={pending}
+                        onClick={() =>
+                          handleToggleActive(member.id, !member.isActive)
+                        }
+                      >
+                        {member.isActive ? (
+                          <>
+                            <UserX className="mr-1 size-3.5" />
+                            Disable
+                          </>
+                        ) : (
+                          <>
+                            <UserCheck className="mr-1 size-3.5" />
+                            Activate
+                          </>
+                        )}
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
@@ -231,7 +228,7 @@ export function UserTable({
       {pagination && pagination.totalPages > 1 && (
         <div className="flex items-center justify-between text-sm">
           <p className="text-muted-foreground">
-            {pagination.total} user{pagination.total === 1 ? "" : "s"}
+            {pagination.total} staff member{pagination.total === 1 ? "" : "s"}
           </p>
           <div className="flex gap-2">
             <Button

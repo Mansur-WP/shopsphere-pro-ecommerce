@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * ShopSphere Pro — automated QA smoke tests (routes + server actions via HTTP)
+ * Africhina Connect — automated QA smoke tests (routes + server actions via HTTP)
  */
 import http from "node:http";
 import https from "node:https";
@@ -10,7 +10,7 @@ const PASSWORD = "password123";
 
 const ACCOUNTS = {
   admin: "admin@shopsphere.com",
-  seller: "seller@shopsphere.com",
+  staff: "seller@shopsphere.com",
   customer: "customer@shopsphere.com",
 };
 
@@ -108,7 +108,7 @@ async function checkRoute(path, { jar, expect = 200, contains = [], notContains 
 }
 
 async function main() {
-  console.log(`\nShopSphere Pro QA — ${BASE}\n${"=".repeat(50)}\n`);
+  console.log(`\nAfrichina Connect QA — ${BASE}\n${"=".repeat(50)}\n`);
 
   // --- Public routes ---
   const publicRoutes = [
@@ -118,7 +118,6 @@ async function main() {
     ["/categories", ["Categories"]],
     ["/login", ["Sign in", "Welcome back"]],
     ["/register", ["Create"]],
-    ["/seller-register", ["seller"]],
     ["/cart", []],
     ["/wishlist", []],
   ];
@@ -129,7 +128,7 @@ async function main() {
 
   // --- Auth redirects ---
   await checkRoute("/admin/dashboard", { expect: [307, 302] });
-  await checkRoute("/seller/dashboard", { expect: [307, 302] });
+  await checkRoute("/staff/dashboard", { expect: [307, 302] });
   await checkRoute("/profile", { expect: [307, 302] });
 
   // --- Customer auth ---
@@ -155,38 +154,38 @@ async function main() {
     log("FAIL", "Product slug resolved", "no product link found");
   }
 
-  // --- Seller auth ---
-  const seller = await authSession(ACCOUNTS.seller);
-  if (seller.session?.user?.role === "SELLER") {
-    log("PASS", "Seller login", "SELLER");
+  // --- Staff auth ---
+  const staff = await authSession(ACCOUNTS.staff);
+  if (staff.session?.user?.role === "STAFF" || staff.session?.user?.role === "SELLER") {
+    log("PASS", "Staff login", staff.session.user.role);
   } else {
-    log("FAIL", "Seller login", JSON.stringify(seller.session));
+    log("FAIL", "Staff login", JSON.stringify(staff.session));
   }
 
-  const sellerRoutes = [
-    ["/seller/dashboard", ["Dashboard", "Revenue"]],
-    ["/seller/products", ["Products"]],
-    ["/seller/products/new", ["Product"]],
-    ["/seller/orders", ["Orders"]],
-    ["/seller/analytics", ["Analytics"]],
-    ["/seller/store", ["Store"]],
+  const staffRoutes = [
+    ["/staff/dashboard", ["Dashboard", "Revenue"]],
+    ["/staff/products", ["Products"]],
+    ["/staff/products/new", ["Product"]],
+    ["/staff/orders", ["Orders"]],
+    ["/staff/analytics", ["Analytics"]],
+    ["/staff/store", ["Branch"]],
   ];
-  for (const [path, needles] of sellerRoutes) {
-    await checkRoute(path, { jar: seller.jar, contains: needles });
+  for (const [path, needles] of staffRoutes) {
+    await checkRoute(path, { jar: staff.jar, contains: needles });
   }
 
-  // --- Admin auth ---
+  // --- Super Admin auth ---
   const admin = await authSession(ACCOUNTS.admin);
-  if (admin.session?.user?.role === "ADMIN") {
-    log("PASS", "Admin login", "ADMIN");
+  if (admin.session?.user?.role === "SUPER_ADMIN" || admin.session?.user?.role === "ADMIN") {
+    log("PASS", "Super Admin login", admin.session.user.role);
   } else {
-    log("FAIL", "Admin login", JSON.stringify(admin.session));
+    log("FAIL", "Super Admin login", JSON.stringify(admin.session));
   }
 
   const adminRoutes = [
     ["/admin/dashboard", ["Platform overview"]],
     ["/admin/users", ["Users"]],
-    ["/admin/sellers", ["Sellers"]],
+    ["/admin/staff", ["Staff"]],
     ["/admin/products", ["Products"]],
     ["/admin/categories", ["Categories"]],
     ["/admin/orders", ["Orders"]],

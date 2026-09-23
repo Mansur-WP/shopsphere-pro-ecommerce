@@ -3,6 +3,8 @@ export { AdminStatsCard } from "./admin-stats-card";
 export type { AdminStatItem, AdminStatIcon } from "./admin-stats-card";
 export { UserTable } from "./user-table";
 export type { AdminUserRow } from "./user-table";
+export { StaffTable } from "./staff-table";
+export type { AdminStaffRow } from "./staff-table";
 export { SellerTable } from "./seller-table";
 export type { AdminSellerRow } from "./seller-table";
 export { ProductTable } from "./product-table";

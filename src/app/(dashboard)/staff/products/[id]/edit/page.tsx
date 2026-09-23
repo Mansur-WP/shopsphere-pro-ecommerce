@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
-import { ProductForm } from "@/components/sellers/product-form";
+import { ProductForm } from "@/components/staff/product-form";
 import { getCategories } from "@/actions/categories";
-import { getSellerProduct } from "@/actions/seller";
+import { getStaffProduct } from "@/actions/staff";
 
 interface EditProductPageProps {
   params: Promise<{ id: string }>;
@@ -9,14 +9,14 @@ interface EditProductPageProps {
 
 export async function generateMetadata({ params }: EditProductPageProps) {
   const { id } = await params;
-  const product = await getSellerProduct(id);
+  const product = await getStaffProduct(id);
   return { title: product ? `Edit ${product.name}` : "Edit product" };
 }
 
 export default async function EditProductPage({ params }: EditProductPageProps) {
   const { id } = await params;
   const [product, categories] = await Promise.all([
-    getSellerProduct(id),
+    getStaffProduct(id),
     getCategories(),
   ]);
 

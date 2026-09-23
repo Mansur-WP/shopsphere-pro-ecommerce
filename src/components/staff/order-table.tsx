@@ -20,7 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { updateSellerOrderStatus } from "@/actions/seller";
+import { updateStaffOrderStatus } from "@/actions/staff";
 import { formatCurrency } from "@/lib/format";
 import type { OrderStatus } from "@prisma/client";
 
@@ -32,7 +32,7 @@ const STATUS_OPTIONS: { value: OrderStatus; label: string }[] = [
   { value: "CANCELLED", label: "Cancelled" },
 ];
 
-export interface SellerOrderRow {
+export interface StaffOrderRow {
   id: string;
   orderNumber: string;
   status: OrderStatus | string;
@@ -45,7 +45,7 @@ export interface SellerOrderRow {
 }
 
 interface OrderTableProps {
-  orders: SellerOrderRow[];
+  orders: StaffOrderRow[];
 }
 
 export function OrderTable({ orders }: OrderTableProps) {
@@ -55,12 +55,12 @@ export function OrderTable({ orders }: OrderTableProps) {
   function handleStatusChange(orderId: string, status: string | null) {
     if (!status) return;
     startTransition(async () => {
-      const result = await updateSellerOrderStatus(
+      const result = await updateStaffOrderStatus(
         orderId,
         status as OrderStatus
       );
       if (result.success) {
-        toast.success("Order status updated");
+        toast.success("Order status updated successfully");
         router.refresh();
       } else {
         toast.error(result.error);
@@ -71,8 +71,7 @@ export function OrderTable({ orders }: OrderTableProps) {
   if (!orders.length) {
     return (
       <div className="rounded-2xl border border-dashed border-border/70 p-12 text-center text-muted-foreground">
-        No orders yet. When customers buy your products, they&apos;ll show up
-        here.
+        No orders found. When customers place orders, they will appear here.
       </div>
     );
   }
@@ -85,7 +84,7 @@ export function OrderTable({ orders }: OrderTableProps) {
             <TableHead>Order</TableHead>
             <TableHead>Customer</TableHead>
             <TableHead>Items</TableHead>
-            <TableHead>Your total</TableHead>
+            <TableHead>Total</TableHead>
             <TableHead>Payment</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Date</TableHead>

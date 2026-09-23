@@ -1,14 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { SalesChart } from "@/components/sellers/sales-chart";
-import { getSellerAnalytics } from "@/actions/seller";
+import { SalesChart } from "@/components/staff/sales-chart";
+import { getStaffAnalytics } from "@/actions/staff";
 import { formatCurrency } from "@/lib/format";
 
 export const metadata = {
-  title: "Seller Analytics",
+  title: "Staff Analytics",
 };
 
-export default async function SellerAnalyticsPage() {
-  const data = await getSellerAnalytics(30);
+export default async function StaffAnalyticsPage() {
+  const data = await getStaffAnalytics(30);
 
   return (
     <div className="space-y-6">
@@ -17,7 +17,7 @@ export default async function SellerAnalyticsPage() {
           Analytics
         </h2>
         <p className="text-muted-foreground">
-          Sales over time, revenue, and best sellers (last 30 days).
+          Sales over time, revenue, and product performance (last 30 days).
         </p>
       </div>
 

@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ProductTable } from "@/components/sellers/product-table";
-import { getSellerProducts } from "@/actions/seller";
+import { ProductTable } from "@/components/staff/product-table";
+import { getStaffProducts } from "@/actions/staff";
 
 export const metadata = {
-  title: "Seller Products",
+  title: "Staff Products",
 };
 
-export default async function SellerProductsPage() {
-  const data = await getSellerProducts(1, 50);
+export default async function StaffProductsPage() {
+  const data = await getStaffProducts(1, 50);
   const products = data?.products ?? [];
 
   return (
@@ -23,7 +23,7 @@ export default async function SellerProductsPage() {
             Manage inventory, pricing, and visibility.
           </p>
         </div>
-        <Link href="/seller/products/new">
+        <Link href="/staff/products/new">
           <Button className="rounded-xl">
             <Plus className="size-4" />
             Add product

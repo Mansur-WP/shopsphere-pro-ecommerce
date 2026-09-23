@@ -53,7 +53,10 @@ async function ProfileContent() {
         }}
       />
 
-      {(user.role === "SELLER" || user.role === "ADMIN") && (
+      {(user.role === "STAFF" ||
+        user.role === "SUPER_ADMIN" ||
+        user.role === "ADMIN" ||
+        user.role === "SELLER") && (
         <Card className="border-border/70">
           <CardHeader>
             <CardTitle className="font-heading text-lg">Workspace</CardTitle>

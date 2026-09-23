@@ -8,27 +8,27 @@ import {
 const features = [
   {
     icon: BadgeCheck,
-    title: "Verified sellers",
+    title: "Direct Verified Sourcing",
     description:
-      "Every store is reviewed before going live, so you shop with confidence.",
+      "Every product is sourced and verified from trusted manufacturers and suppliers.",
   },
   {
     icon: Lock,
     title: "Secure checkout",
     description:
-      "Encrypted payments with Stripe and order protection on every purchase.",
+      "Encrypted payments with Paystack & Stripe with complete order protection.",
   },
   {
     icon: Zap,
     title: "Fast fulfillment",
     description:
-      "Real-time inventory and tracking from warehouse to your doorstep.",
+      "Real-time inventory and tracking from origin warehouse directly to your doorstep.",
   },
   {
     icon: Headset,
     title: "Dedicated support",
     description:
-      "Human help when you need it — for buyers and sellers alike.",
+      "Responsive customer service and trade assistance whenever you need it.",
   },
 ];
 
@@ -38,11 +38,11 @@ export function WhyChooseSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-heading text-2xl font-bold tracking-tight sm:text-3xl">
-            Why choose ShopSphere
+            Why choose Africhina Connect
           </h2>
           <p className="mt-3 text-muted-foreground">
-            A premium multi-vendor platform designed for clarity, trust, and
-            speed — not marketplace noise.
+            A premium cross-border commerce platform designed for quality, reliability,
+            and seamless Africa-China trade.
           </p>
         </div>
         <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">

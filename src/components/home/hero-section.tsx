@@ -24,15 +24,15 @@ export function HeroSection() {
       <div className="relative mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-center px-4 py-24 sm:px-6 lg:px-8">
         <div className="max-w-2xl animate-in fade-in slide-in-from-bottom-8 duration-700">
           <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300/90">
-            ShopSphere Pro
+            Africhina Connect
           </p>
           <h1 className="font-heading mt-5 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            The marketplace built for{" "}
-            <span className="text-emerald-300">premium commerce</span>
+            Connecting Africa & China through{" "}
+            <span className="text-emerald-300">direct commerce</span>
           </h1>
           <p className="mt-6 max-w-lg text-base leading-relaxed text-slate-300 sm:text-lg">
-            Discover curated products from trusted sellers — seamless shopping,
-            secure checkout, and delivery you can count on.
+            Direct access to verified quality goods, seamless cross-border supply,
+            and reliable delivery across Africa and China.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <Link href="/products">
@@ -44,19 +44,19 @@ export function HeroSection() {
                 <ArrowRight className="size-4" />
               </Button>
             </Link>
-            <Link href="/seller-register">
+            <Link href="/categories">
               <Button
                 size="lg"
                 variant="outline"
                 className="rounded-xl border-white/25 bg-white/5 px-8 text-white backdrop-blur-sm hover:bg-white/10 hover:text-white"
               >
-                Become a seller
+                Explore categories
               </Button>
             </Link>
           </div>
           <div className="mt-10 inline-flex items-center gap-2 text-xs text-slate-400">
             <Sparkles className="size-3.5 text-emerald-400" />
-            Verified sellers · Secure payments · Fast shipping
+            Verified Quality · Direct Sourcing · Global Logistics
           </div>
         </div>
       </div>

@@ -8,8 +8,10 @@ datasource db {
 
 enum Role {
   CUSTOMER
-  SELLER
+  STAFF
+  SUPER_ADMIN
   ADMIN
+  SELLER
 }
 
 enum SellerStatus {

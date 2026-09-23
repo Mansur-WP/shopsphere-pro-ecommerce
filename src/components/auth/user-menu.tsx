@@ -14,8 +14,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { logoutAction } from "@/actions/auth";
-import { canAccessAdmin, canAccessSeller } from "@/lib/rbac";
+import { signOut } from "next-auth/react";
+import { canAccessAdmin, canAccessStaff } from "@/lib/rbac";
 
 function initials(name?: string | null, email?: string | null) {
   if (name?.trim()) {
@@ -96,23 +96,22 @@ export function UserMenu() {
             <Package className="size-4" />
             Orders
           </DropdownMenuItem>
-          {canAccessSeller(user.role) && (
-            <DropdownMenuItem render={<Link href="/seller/dashboard" />}>
-              <LayoutDashboard className="size-4" />
-              Seller Dashboard
-            </DropdownMenuItem>
-          )}
-          {canAccessAdmin(user.role) && (
+          {canAccessAdmin(user.role) ? (
             <DropdownMenuItem render={<Link href="/admin/dashboard" />}>
               <LayoutDashboard className="size-4" />
               Admin Dashboard
             </DropdownMenuItem>
-          )}
+          ) : canAccessStaff(user.role) ? (
+            <DropdownMenuItem render={<Link href="/staff/dashboard" />}>
+              <LayoutDashboard className="size-4" />
+              Staff Dashboard
+            </DropdownMenuItem>
+          ) : null}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
-            onClick={() => logoutAction()}
+            onClick={() => signOut({ callbackUrl: "/" })}
             className="text-destructive"
           >
             <LogOut className="size-4" />

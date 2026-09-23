@@ -29,10 +29,10 @@ async function main() {
 
   const admin = await prisma.user.create({
     data: {
-      name: "Platform Admin",
+      name: "Platform Owner",
       email: "admin@shopsphere.com",
       password,
-      role: "ADMIN",
+      role: "SUPER_ADMIN",
       cart: { create: {} },
       wishlist: { create: {} },
     },
@@ -56,10 +56,10 @@ async function main() {
 
   const sellerUser = await prisma.user.create({
     data: {
-      name: "Sam Seller",
+      name: "Sam Staff",
       email: "seller@shopsphere.com",
       password,
-      role: "SELLER",
+      role: "STAFF",
       cart: { create: {} },
       wishlist: { create: {} },
       sellerProfile: {
@@ -83,7 +83,7 @@ async function main() {
       name: "Jordan Merchant",
       email: "merchant@shopsphere.com",
       password,
-      role: "SELLER",
+      role: "STAFF",
       cart: { create: {} },
       wishlist: { create: {} },
       sellerProfile: {

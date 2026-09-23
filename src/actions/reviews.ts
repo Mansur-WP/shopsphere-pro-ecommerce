@@ -177,7 +177,7 @@ export async function createReview(raw: unknown): Promise<ActionResult> {
 
 export async function getAdminReviews(page = 1, limit = 20) {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return null;
   }
@@ -224,7 +224,7 @@ export async function hideReview(
   hidden = true
 ): Promise<ActionResult> {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return { success: false, error: "Unauthorized" };
   }
@@ -248,7 +248,7 @@ export async function hideReview(
 
 export async function deleteReview(reviewId: string): Promise<ActionResult> {
   try {
-    await requireRole(["ADMIN"]);
+    await requireRole(["SUPER_ADMIN", "ADMIN"]);
   } catch {
     return { success: false, error: "Unauthorized" };
   }

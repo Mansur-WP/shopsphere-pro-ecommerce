@@ -82,7 +82,7 @@ export async function completePaidOrder(
         type: "ORDER_NEW",
         title: "New order",
         message: `Order ${order.orderNumber} includes items from ${seller.storeName}.`,
-        link: `/seller/orders`,
+        link: `/staff/orders`,
       })
     ),
     notifyAdmins({

@@ -30,7 +30,7 @@ export function NewsletterSection() {
             Stay in the loop
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            New drops, curated picks, and seller stories — no spam, unsubscribe
+            New arrivals, curated picks, and exclusive market deals — no spam, unsubscribe
             anytime.
           </p>
           <form
