@@ -14,49 +14,51 @@ export function HeroSection() {
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-br from-slate-950/92 via-slate-900/85 to-emerald-950/75"
+        className="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/90 to-blue-950/75"
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_20%_40%,rgba(16,185,129,0.22),transparent)]"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_20%_40%,rgba(37,99,235,0.18),transparent)]"
       />
 
       <div className="relative mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-center px-4 py-24 sm:px-6 lg:px-8">
         <div className="max-w-2xl animate-in fade-in slide-in-from-bottom-8 duration-700">
-          <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300/90">
-            Africhina Connect
+          <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-blue-400">
+            China → Nigeria Sourcing & Ecommerce
           </p>
           <h1 className="font-heading mt-5 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Connecting Africa & China through{" "}
-            <span className="text-emerald-300">direct commerce</span>
+            Source products from China,{" "}
+            <span className="text-blue-400">delivered to Nigeria</span>
           </h1>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-slate-300 sm:text-lg">
-            Direct access to verified quality goods, seamless cross-border supply,
-            and reliable delivery across Africa and China.
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
+            Africhina Connect helps Nigerian businesses and shoppers buy directly
+            from verified Chinese suppliers. We coordinate overseas sourcing,
+            manage the shipping pipeline, and provide clear tracking until your
+            package arrives.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <Link href="/products">
               <Button
                 size="lg"
-                className="rounded-xl bg-emerald-500 px-8 text-slate-950 hover:bg-emerald-400"
+                className="rounded-xl bg-blue-600 px-8 text-white hover:bg-blue-500"
               >
-                Shop collection
+                Browse products
                 <ArrowRight className="size-4" />
               </Button>
             </Link>
-            <Link href="/categories">
+            <Link href="/orders">
               <Button
                 size="lg"
                 variant="outline"
-                className="rounded-xl border-white/25 bg-white/5 px-8 text-white backdrop-blur-sm hover:bg-white/10 hover:text-white"
+                className="rounded-xl border-white/20 bg-white/5 px-8 text-white backdrop-blur-sm hover:bg-white/10 hover:text-white"
               >
-                Explore categories
+                Track an order
               </Button>
             </Link>
           </div>
           <div className="mt-10 inline-flex items-center gap-2 text-xs text-slate-400">
-            <Sparkles className="size-3.5 text-emerald-400" />
-            Verified Quality · Direct Sourcing · Global Logistics
+            <Sparkles className="size-3.5 text-blue-400" />
+            Verified Suppliers · Managed Shipping Coordination · Live Order Tracking
           </div>
         </div>
       </div>

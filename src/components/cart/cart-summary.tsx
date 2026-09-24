@@ -59,7 +59,7 @@ export function CartSummary({
         {remaining > 0 && (
           <p className="text-xs text-muted-foreground">
             Add {formatCurrency(remaining)} more for free shipping
-            (orders ${FREE_SHIPPING_THRESHOLD}+).
+            (orders {formatCurrency(FREE_SHIPPING_THRESHOLD)}+).
           </p>
         )}
         {showCheckout && (

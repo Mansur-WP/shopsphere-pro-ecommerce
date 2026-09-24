@@ -334,9 +334,9 @@ async function updateSellerStatus(
         status === "APPROVED" ? "Store approved" : "Application not approved",
       message:
         status === "APPROVED"
-          ? `${seller.storeName} is live on ShopSphere Pro.`
+          ? `${seller.storeName} is active on Africhina Connect.`
           : `${seller.storeName} was not approved.`,
-      link: status === "APPROVED" ? "/seller/dashboard" : "/seller-register",
+      link: status === "APPROVED" ? "/staff/dashboard" : "/register",
     });
 
     await sendSellerApprovalEmail({

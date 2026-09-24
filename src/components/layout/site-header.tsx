@@ -25,6 +25,7 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { href: "/products", label: "Shop" },
   { href: "/categories", label: "Categories" },
+  { href: "/orders", label: "Track Orders" },
 ];
 
 export function SiteHeader() {
@@ -44,7 +45,7 @@ export function SiteHeader() {
             <Store className="size-4" />
           </span>
           <span className="font-heading text-lg font-semibold tracking-tight">
-            Africhina<span className="text-emerald-600 dark:text-emerald-400"> Connect</span>
+            Africhina<span className="text-blue-600 dark:text-blue-400"> Connect</span>
           </span>
         </Link>
 

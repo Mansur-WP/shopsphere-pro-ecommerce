@@ -54,7 +54,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
   return (
     <Card
       className={cn(
-        "group overflow-hidden border-border/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/5",
+        "group overflow-hidden border-border/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/5",
         className
       )}
     >
@@ -71,7 +71,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
             sizes="(max-width: 768px) 50vw, 25vw"
           />
           {discount != null && (
-            <Badge className="absolute left-3 top-3 z-10 bg-emerald-600 text-white hover:bg-emerald-600">
+            <Badge className="absolute left-3 top-3 z-10 bg-blue-600 text-white hover:bg-blue-600">
               -{discount}%
             </Badge>
           )}
@@ -98,16 +98,16 @@ export function ProductCard({ product, className }: ProductCardProps) {
 
       <CardContent className="space-y-1.5 pt-0">
         {product.category && (
-          <p className="text-[11px] font-medium uppercase tracking-wide text-emerald-600 dark:text-emerald-400">
+          <p className="text-[11px] font-medium uppercase tracking-wide text-blue-600 dark:text-blue-400">
             {product.category.name}
           </p>
         )}
         <Link href={`/products/${product.slug}`}>
-          <h3 className="font-heading line-clamp-2 text-sm font-semibold leading-snug transition-colors hover:text-emerald-600 dark:hover:text-emerald-400">
+          <h3 className="font-heading line-clamp-2 text-sm font-semibold leading-snug transition-colors hover:text-blue-600 dark:hover:text-blue-400">
             {product.name}
           </h3>
         </Link>
-        <p className="truncate text-xs text-emerald-600/80 dark:text-emerald-400/80">
+        <p className="truncate text-xs text-blue-600/80 dark:text-blue-400/80">
           Africhina Direct
         </p>
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">

@@ -40,7 +40,7 @@ export const useWishlistStore = create<WishlistState>()(
       clear: () => set({ productIds: [] }),
     }),
     {
-      name: "shopsphere-wishlist",
+      name: "africhina-wishlist",
       onRehydrateStorage: () => (state) => {
         state?.setHydrated(true);
       },

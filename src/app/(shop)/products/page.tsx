@@ -28,7 +28,7 @@ export async function generateMetadata({
   return {
     title: titleParts.join(" · "),
     description:
-      "Browse curated products across electronics, fashion, home, and more on ShopSphere Pro.",
+      "Direct China-to-Nigeria catalog: electronics, lifestyle, fashion, and industrial products on Africhina Connect.",
   };
 }
 

@@ -8,7 +8,7 @@ import { getUserOrders } from "@/actions/orders";
 
 export const metadata: Metadata = {
   title: "Orders",
-  description: "View your ShopSphere Pro order history and status.",
+  description: "View your Africhina Connect order history and track shipments.",
 };
 
 export default async function OrdersPage() {

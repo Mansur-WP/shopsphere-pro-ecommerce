@@ -60,7 +60,7 @@ export function RegisterForm() {
       <CardHeader className="text-center">
         <CardTitle className="font-heading text-2xl">Create account</CardTitle>
         <CardDescription>
-          Join ShopSphere Pro and start shopping
+          Join Africhina Connect and start shopping
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>

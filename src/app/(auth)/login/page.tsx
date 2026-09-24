@@ -4,7 +4,7 @@ import { LoginForm } from "@/components/auth/login-form";
 
 export const metadata = {
   title: "Sign in",
-  description: "Sign in to your ShopSphere Pro account",
+  description: "Sign in to your Africhina Connect account",
 };
 
 async function LoginFormSlot({

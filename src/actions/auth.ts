@@ -167,8 +167,8 @@ export async function sellerRegisterAction(
   await notifyAdmins({
     type: "SELLER_APPLICATION",
     title: "New seller application",
-    message: `${parsed.data.storeName} applied to sell on ShopSphere.`,
-    link: "/admin/sellers?status=PENDING",
+    message: `${parsed.data.storeName} applied to sell on Africhina Connect.`,
+    link: "/admin/staff",
   });
 
   return {

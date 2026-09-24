@@ -14,7 +14,7 @@ import {
 
 export const metadata = {
   title: "Profile",
-  description: "Manage your ShopSphere Pro account",
+  description: "Manage your Africhina Connect account",
 };
 
 export default async function ProfilePage() {

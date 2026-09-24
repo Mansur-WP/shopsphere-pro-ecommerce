@@ -1,7 +1,7 @@
 export function generateOrderNumber() {
   const stamp = Date.now().toString(36).toUpperCase();
   const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
-  return `SSP-${stamp}-${rand}`;
+  return `AFC-${stamp}-${rand}`;
 }
 
 export function formatCurrency(amount: number | string, currency = "USD") {

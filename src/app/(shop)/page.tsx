@@ -11,13 +11,13 @@ import { getFeaturedProducts } from "@/actions/products";
 import { getCategories } from "@/actions/categories";
 
 export const metadata = {
-  title: "Africhina Connect — Premium Africa-China Commerce & Trade",
+  title: "Africhina Connect — China to Nigeria Sourcing & Ecommerce",
   description:
-    "Direct Africa-China trade, verified quality goods, secure payments, and reliable cross-border logistics.",
+    "Direct product sourcing from China to Nigeria. Browse verified products, let Africhina handle cross-border coordination, and track your shipments from dispatch to delivery.",
   openGraph: {
-    title: "Africhina Connect",
+    title: "Africhina Connect — China to Nigeria Sourcing & Ecommerce",
     description:
-      "Premium commerce platform connecting African businesses and consumers directly to verified Chinese manufacturing and products.",
+      "Buy products directly from China with reliable shipping coordination and tracking to Nigeria.",
     type: "website",
   },
 };
@@ -46,7 +46,7 @@ export default async function HomePage() {
               Featured products
             </h2>
             <p className="mt-2 text-muted-foreground">
-              Hand-picked selections and verified direct inventory.
+              Directly sourced selections from verified Chinese manufacturers.
             </p>
           </div>
           <Link href="/products">
@@ -69,7 +69,7 @@ export default async function HomePage() {
               Shop by category
             </h2>
             <p className="mt-2 text-muted-foreground">
-              Explore collections crafted for everyday living and work.
+              Explore key product categories sourced for Nigerian businesses and consumers.
             </p>
           </div>
           {categories.length ? (

@@ -82,10 +82,10 @@ export function DashboardShell({
                 </span>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-heading font-semibold">
-                    ShopSphere
-                    <span className="text-emerald-600 dark:text-emerald-400">
+                    Africhina
+                    <span className="text-blue-600 dark:text-blue-400">
                       {" "}
-                      Pro
+                      Connect
                     </span>
                   </span>
                   {badge && (

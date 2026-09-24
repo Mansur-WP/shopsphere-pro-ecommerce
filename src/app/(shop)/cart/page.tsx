@@ -3,7 +3,7 @@ import { CartView } from "@/components/cart/cart-view";
 
 export const metadata: Metadata = {
   title: "Shopping cart",
-  description: "Review items in your ShopSphere Pro cart before checkout.",
+  description: "Review items in your Africhina Connect cart before checkout.",
 };
 
 export default function CartPage() {

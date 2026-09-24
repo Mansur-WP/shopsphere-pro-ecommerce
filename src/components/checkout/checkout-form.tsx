@@ -152,6 +152,7 @@ export function CheckoutForm({ defaultValues }: CheckoutFormProps) {
               <Input
                 id="shippingPhone"
                 type="tel"
+                placeholder="+234 800 000 0000"
                 className="rounded-xl"
                 {...register("shippingPhone")}
               />
@@ -160,6 +161,7 @@ export function CheckoutForm({ defaultValues }: CheckoutFormProps) {
               <Label htmlFor="shippingAddress">Street address</Label>
               <Input
                 id="shippingAddress"
+                placeholder="e.g. 15 Adeola Odeku St, Victoria Island"
                 className="rounded-xl"
                 aria-invalid={!!errors.shippingAddress}
                 {...register("shippingAddress")}
@@ -174,6 +176,7 @@ export function CheckoutForm({ defaultValues }: CheckoutFormProps) {
               <Label htmlFor="shippingCity">City</Label>
               <Input
                 id="shippingCity"
+                placeholder="e.g. Lagos, Abuja, Port Harcourt"
                 className="rounded-xl"
                 aria-invalid={!!errors.shippingCity}
                 {...register("shippingCity")}
@@ -188,6 +191,7 @@ export function CheckoutForm({ defaultValues }: CheckoutFormProps) {
               <Label htmlFor="shippingPostal">Postal code</Label>
               <Input
                 id="shippingPostal"
+                placeholder="e.g. 101241"
                 className="rounded-xl"
                 aria-invalid={!!errors.shippingPostal}
                 {...register("shippingPostal")}
@@ -202,6 +206,7 @@ export function CheckoutForm({ defaultValues }: CheckoutFormProps) {
               <Label htmlFor="shippingCountry">Country</Label>
               <Input
                 id="shippingCountry"
+                placeholder="Nigeria"
                 className="rounded-xl"
                 aria-invalid={!!errors.shippingCountry}
                 {...register("shippingCountry")}
@@ -218,7 +223,7 @@ export function CheckoutForm({ defaultValues }: CheckoutFormProps) {
                 id="notes"
                 rows={3}
                 className="rounded-xl"
-                placeholder="Delivery instructions, gift message…"
+                placeholder="Delivery instructions, landmarks…"
                 {...register("notes")}
               />
             </div>
@@ -243,10 +248,10 @@ export function CheckoutForm({ defaultValues }: CheckoutFormProps) {
                 : "No Stripe key configured — orders complete instantly in demo mode. Add STRIPE_SECRET_KEY to enable live payments."}
             </p>
             <div className="flex items-start gap-3 rounded-xl border border-border/70 bg-muted/30 p-4 text-sm">
-              <Lock className="mt-0.5 size-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
+              <Lock className="mt-0.5 size-4 shrink-0 text-blue-600 dark:text-blue-400" />
               <p className="text-muted-foreground">
                 Your payment information is encrypted. We never store full card
-                details on ShopSphere servers.
+                details on Africhina Connect servers.
               </p>
             </div>
           </CardContent>
@@ -298,7 +303,7 @@ export function CheckoutForm({ defaultValues }: CheckoutFormProps) {
             {pending ? "Placing order…" : "Confirm order"}
           </Button>
           <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
-            <ShieldCheck className="size-3.5 text-emerald-600 dark:text-emerald-400" />
+            <ShieldCheck className="size-3.5 text-blue-600 dark:text-blue-400" />
             Secure checkout · Cancel anytime before payment
           </p>
         </CardContent>

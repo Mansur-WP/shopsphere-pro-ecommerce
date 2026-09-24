@@ -8,27 +8,27 @@ import {
 const features = [
   {
     icon: BadgeCheck,
-    title: "Direct Verified Sourcing",
+    title: "Direct China Sourcing",
     description:
-      "Every product is sourced and verified from trusted manufacturers and suppliers.",
+      "We connect you directly to verified Chinese suppliers and manufacturers without middlemen.",
   },
   {
     icon: Lock,
-    title: "Secure checkout",
+    title: "Secure Payments",
     description:
-      "Encrypted payments with Paystack & Stripe with complete order protection.",
+      "Protected checkout and encrypted transactions for a safe, reliable buying experience.",
   },
   {
     icon: Zap,
-    title: "Fast fulfillment",
+    title: "Handled Logistics",
     description:
-      "Real-time inventory and tracking from origin warehouse directly to your doorstep.",
+      "We coordinate overseas freight and customs handling so you do not have to navigate import complexities.",
   },
   {
     icon: Headset,
-    title: "Dedicated support",
+    title: "Clear Order Tracking",
     description:
-      "Responsive customer service and trade assistance whenever you need it.",
+      "Track your shipment from China warehouse dispatch all the way to local Nigerian delivery.",
   },
 ];
 
@@ -41,8 +41,8 @@ export function WhyChooseSection() {
             Why choose Africhina Connect
           </h2>
           <p className="mt-3 text-muted-foreground">
-            A premium cross-border commerce platform designed for quality, reliability,
-            and seamless Africa-China trade.
+            A practical, professional bridge connecting Nigerian buyers with China&apos;s
+            manufacturing hubs.
           </p>
         </div>
         <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -52,7 +52,7 @@ export function WhyChooseSection() {
               className="animate-in fade-in slide-in-from-bottom-4 duration-500"
               style={{ animationDelay: `${i * 100}ms` }}
             >
-              <div className="flex size-11 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+              <div className="flex size-11 items-center justify-center rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
                 <feature.icon className="size-5" />
               </div>
               <h3 className="font-heading mt-4 text-base font-semibold">

@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer());
     const base64 = `data:${file.type};base64,${buffer.toString("base64")}`;
     const folder =
-      session.user.role === "ADMIN" ? "shopsphere/admin" : "shopsphere/products";
+      session.user.role === "ADMIN" ? "africhina/admin" : "africhina/products";
 
     const result = await uploadImage(base64, folder);
 

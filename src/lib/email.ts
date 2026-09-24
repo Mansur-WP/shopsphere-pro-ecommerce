@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 const from =
-  process.env.EMAIL_FROM || "ShopSphere Pro <onboarding@resend.dev>";
+  process.env.EMAIL_FROM || "Africhina Connect <onboarding@resend.dev>";
 
 function getResend() {
   const key = process.env.RESEND_API_KEY;
@@ -43,11 +43,11 @@ function layout(title: string, body: string) {
 <html>
 <body style="margin:0;font-family:system-ui,-apple-system,sans-serif;background:#0f172a;color:#e2e8f0;">
   <div style="max-width:560px;margin:32px auto;padding:32px;background:#1e293b;border-radius:16px;">
-    <p style="margin:0 0 8px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#34d399;">ShopSphere Pro</p>
+    <p style="margin:0 0 8px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#3b82f6;">Africhina Connect</p>
     <h1 style="margin:0 0 16px;font-size:22px;color:#f8fafc;">${title}</h1>
     <div style="font-size:15px;line-height:1.6;color:#cbd5e1;">${body}</div>
     <p style="margin:28px 0 0;font-size:12px;color:#64748b;">
-      <a href="${appUrl}" style="color:#34d399;text-decoration:none;">Visit ShopSphere Pro</a>
+      <a href="${appUrl}" style="color:#3b82f6;text-decoration:none;">Visit Africhina Connect</a>
     </p>
   </div>
 </body>

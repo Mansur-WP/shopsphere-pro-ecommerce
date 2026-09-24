@@ -26,7 +26,7 @@ export function CategoryCard({
     <Link
       href={`/categories/${slug}`}
       className={cn(
-        "group relative block aspect-[4/5] overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500",
+        "group relative block aspect-[4/5] overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
         "animate-in fade-in slide-in-from-bottom-4 duration-500",
         className
       )}
@@ -41,7 +41,7 @@ export function CategoryCard({
           sizes="(max-width: 768px) 50vw, 25vw"
         />
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-emerald-900" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-blue-950" />
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 p-5">
@@ -56,7 +56,7 @@ export function CategoryCard({
                 : `${productCount} product${productCount === 1 ? "" : "s"}`}
             </p>
           </div>
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors group-hover:bg-emerald-500 group-hover:text-slate-950">
+          <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors group-hover:bg-blue-600 group-hover:text-white">
             <ArrowUpRight className="size-4" />
           </span>
         </div>

@@ -38,7 +38,7 @@ async function SuccessContent({
 
   return (
     <div className="mx-auto flex min-h-[70vh] max-w-lg flex-col items-center justify-center px-4 py-16 text-center">
-      <span className="mb-6 flex size-16 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+      <span className="mb-6 flex size-16 items-center justify-center rounded-2xl bg-blue-500/15 text-blue-600 dark:text-blue-400">
         <CheckCircle2 className="size-8" />
       </span>
       <h1 className="font-heading text-3xl font-bold tracking-tight">
@@ -47,7 +47,7 @@ async function SuccessContent({
       <p className="mt-3 text-muted-foreground">
         {demo
           ? "Demo checkout completed — your order is confirmed."
-          : "Thank you. Your payment was received and sellers are preparing your items."}
+          : "Thank you. Your payment was received and your order is being coordinated for shipment from China."}
       </p>
 
       {order && (

@@ -33,7 +33,7 @@ export function SiteFooter() {
               </span>
               <span className="font-heading text-lg font-semibold tracking-tight">
                 Africhina
-                <span className="text-emerald-600 dark:text-emerald-400"> Connect</span>
+                <span className="text-blue-600 dark:text-blue-400"> Connect</span>
               </span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">

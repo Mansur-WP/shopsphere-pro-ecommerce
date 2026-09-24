@@ -11,7 +11,7 @@ export { cloudinary };
 
 export async function uploadImage(
   file: string,
-  folder = "shopsphere"
+  folder = "africhina"
 ): Promise<{ url: string; publicId: string }> {
   const result = await cloudinary.uploader.upload(file, {
     folder,

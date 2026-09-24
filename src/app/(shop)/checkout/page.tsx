@@ -5,7 +5,7 @@ import { getAddresses } from "@/actions/address";
 
 export const metadata: Metadata = {
   title: "Checkout",
-  description: "Complete your ShopSphere Pro order securely.",
+  description: "Complete your Africhina Connect order securely.",
 };
 
 export default async function CheckoutPage() {
@@ -30,7 +30,7 @@ export default async function CheckoutPage() {
           shippingAddress: defaultAddress?.line1 ?? user?.address ?? undefined,
           shippingCity: defaultAddress?.city ?? user?.city ?? undefined,
           shippingCountry:
-            defaultAddress?.country ?? user?.country ?? "US",
+            defaultAddress?.country ?? user?.country ?? "Nigeria",
           shippingPostal:
             defaultAddress?.postalCode ?? user?.postalCode ?? undefined,
         }}

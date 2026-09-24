@@ -112,7 +112,7 @@ async function main() {
 
   // --- Public routes ---
   const publicRoutes = [
-    ["/", ["ShopSphere"]],
+    ["/", ["Africhina Connect"]],
     ["/products", ["Products"]],
     ["/products?q=serum", []],
     ["/categories", ["Categories"]],

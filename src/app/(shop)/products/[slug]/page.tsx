@@ -60,9 +60,10 @@ export default async function ProductDetailPage({
     description: product.description,
     image: product.images,
     sku: product.sku ?? undefined,
-    brand: product.seller
-      ? { "@type": "Brand", name: product.seller.storeName }
-      : undefined,
+    brand: {
+      "@type": "Brand",
+      name: product.seller?.storeName ?? "Africhina Connect",
+    },
     offers: {
       "@type": "Offer",
       priceCurrency: "USD",

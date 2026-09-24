@@ -20,25 +20,33 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
   ),
   title: {
-    default: "ShopSphere Pro",
-    template: "%s | ShopSphere Pro",
+    default: "Africhina Connect",
+    template: "%s | Africhina Connect",
   },
   description:
-    "Premium multi-vendor marketplace. Discover curated products from trusted sellers with seamless checkout and fast delivery.",
-  keywords: ["marketplace", "ecommerce", "multi-vendor", "shop", "ShopSphere"],
+    "China to Nigeria ecommerce and product sourcing platform. Direct access to verified Chinese suppliers, handled shipping coordination, and clear order tracking.",
+  keywords: [
+    "Africhina Connect",
+    "China to Nigeria",
+    "product sourcing",
+    "import to Nigeria",
+    "ecommerce",
+    "Nigeria trade",
+    "cross-border commerce",
+  ],
   openGraph: {
     type: "website",
-    locale: "en_US",
-    siteName: "ShopSphere Pro",
-    title: "ShopSphere Pro",
+    locale: "en_NG",
+    siteName: "Africhina Connect",
+    title: "Africhina Connect — China to Nigeria Sourcing & Ecommerce",
     description:
-      "Premium multi-vendor marketplace with secure checkout and trusted sellers.",
+      "Direct product sourcing from China to Nigeria with handled logistics coordination and end-to-end order tracking.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ShopSphere Pro",
+    title: "Africhina Connect",
     description:
-      "Premium multi-vendor marketplace with secure checkout and trusted sellers.",
+      "Direct product sourcing from China to Nigeria with handled logistics coordination and end-to-end order tracking.",
   },
   robots: {
     index: true,
