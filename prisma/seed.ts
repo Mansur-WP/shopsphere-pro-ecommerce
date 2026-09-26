@@ -9,7 +9,7 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log("🌱 Seeding ShopSphere Pro...");
+  console.log("🌱 Seeding Africhina Connect...");
 
   await prisma.review.deleteMany();
   await prisma.orderItem.deleteMany();
@@ -40,15 +40,15 @@ async function main() {
 
   const customer = await prisma.user.create({
     data: {
-      name: "Alex Customer",
+      name: "Chidi Okonkwo",
       email: "customer@shopsphere.com",
       password,
       role: "CUSTOMER",
-      phone: "+1 555 0100",
-      address: "120 Market Street",
-      city: "San Francisco",
-      country: "US",
-      postalCode: "94105",
+      phone: "+234 801 234 5678",
+      address: "14 Admiralty Way",
+      city: "Lagos",
+      country: "Nigeria",
+      postalCode: "101233",
       cart: { create: {} },
       wishlist: { create: {} },
     },
@@ -56,7 +56,7 @@ async function main() {
 
   const sellerUser = await prisma.user.create({
     data: {
-      name: "Sam Staff",
+      name: "Amara Nwosu",
       email: "seller@shopsphere.com",
       password,
       role: "STAFF",
@@ -64,14 +64,13 @@ async function main() {
       wishlist: { create: {} },
       sellerProfile: {
         create: {
-          storeName: "Nordic Atelier",
-          storeSlug: "nordic-atelier",
+          storeName: "Africhina Warehouse",
+          storeSlug: "africhina-warehouse",
           description:
-            "Thoughtfully crafted home goods and everyday essentials with a clean Scandinavian sensibility.",
-          businessEmail: "hello@nordicatelier.test",
-          phone: "+1 555 0200",
+            "Primary operations hub for Africhina Connect — managing electronics, lifestyle, and industrial product lines.",
+          businessEmail: "ops@africhina.com",
+          phone: "+234 802 000 1000",
           status: "APPROVED",
-          logo: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=200&fit=crop",
         },
       },
     },
@@ -80,7 +79,7 @@ async function main() {
 
   const seller2 = await prisma.user.create({
     data: {
-      name: "Jordan Merchant",
+      name: "Emeka Eze",
       email: "merchant@shopsphere.com",
       password,
       role: "STAFF",
@@ -88,11 +87,11 @@ async function main() {
       wishlist: { create: {} },
       sellerProfile: {
         create: {
-          storeName: "Pulse Gear",
-          storeSlug: "pulse-gear",
+          storeName: "Africhina Tech Hub",
+          storeSlug: "africhina-tech-hub",
           description:
-            "Performance-driven tech accessories built for modern work and travel.",
-          businessEmail: "sales@pulsegear.test",
+            "Africhina Connect technology division — smartphones, accessories, and smart devices.",
+          businessEmail: "tech@africhina.com",
           status: "APPROVED",
         },
       },
@@ -105,99 +104,93 @@ async function main() {
       data: {
         name: "Electronics",
         slug: "electronics",
-        description: "Devices and accessories for work and play",
+        description: "Smartphones, accessories, and smart devices",
         image:
           "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&h=600&fit=crop",
       },
     }),
     prisma.category.create({
       data: {
-        name: "Home & Living",
-        slug: "home-living",
-        description: "Elevated essentials for modern spaces",
+        name: "Home & Kitchen",
+        slug: "home-kitchen",
+        description: "Appliances and essentials for modern Nigerian homes",
         image:
-          "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
       },
     }),
     prisma.category.create({
       data: {
-        name: "Clothing",
-        slug: "clothing",
-        description: "Timeless wardrobe staples with everyday comfort",
+        name: "Fashion",
+        slug: "fashion",
+        description: "Clothing, footwear, and apparel",
         image:
           "https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&h=600&fit=crop",
       },
     }),
     prisma.category.create({
       data: {
-        name: "Accessories",
-        slug: "accessories",
-        description: "Bags, watches, and finishing touches",
+        name: "Bags & Accessories",
+        slug: "bags-accessories",
+        description: "Bags, watches, and everyday carry accessories",
         image:
           "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=800&h=600&fit=crop",
       },
     }),
     prisma.category.create({
       data: {
-        name: "Beauty",
-        slug: "beauty",
-        description: "Clean formulas and considered rituals",
+        name: "Beauty & Personal Care",
+        slug: "beauty-personal-care",
+        description: "Skincare, grooming, and personal care products",
         image:
           "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&h=600&fit=crop",
       },
     }),
+    prisma.category.create({
+      data: {
+        name: "Industrial & Tools",
+        slug: "industrial-tools",
+        description: "Power tools, equipment, and industrial supplies",
+        image:
+          "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=600&fit=crop",
+      },
+    }),
   ]);
 
-  const [electronics, home, clothing, accessories, beauty] = categories;
+  const [electronics, homeKitchen, fashion, bagsAcc, beauty, industrial] =
+    categories;
   const sellerId = sellerUser.sellerProfile!.id;
   const merchantId = seller2.sellerProfile!.id;
 
   const catalog = [
+    // Electronics
     {
-      name: "Aura Wireless Headphones",
-      slug: "aura-wireless-headphones",
+      name: "Wireless Bluetooth Earbuds",
+      slug: "wireless-bluetooth-earbuds",
       description:
-        "Over-ear wireless headphones with adaptive noise control, 40-hour battery life, and a balanced sound profile tuned for long listening sessions.",
-      price: 249,
-      compareAt: 299,
-      stock: 48,
-      sku: "AURA-WH-01",
+        "True wireless earbuds with active noise cancellation, 30-hour total battery life (6hr buds + 24hr case), IPX4 water resistance, and fast pairing across Android and iOS.",
+      price: 18500,
+      compareAt: 24000,
+      stock: 120,
+      sku: "AFC-EAR-001",
       featured: true,
       categoryId: electronics.id,
       sellerId: merchantId,
       images: [
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=800&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&h=800&fit=crop",
       ],
-      ratingAvg: 4.7,
-      ratingCount: 2,
+      ratingAvg: 4.6,
+      ratingCount: 3,
     },
     {
-      name: "Orbit Compact Keyboard",
-      slug: "orbit-compact-keyboard",
+      name: "Android Smart Watch",
+      slug: "android-smart-watch",
       description:
-        "Low-profile mechanical keyboard with hot-swappable switches, aluminum top plate, and multi-device Bluetooth for desk and travel setups.",
-      price: 179,
-      stock: 55,
-      sku: "ORB-KB-05",
-      featured: false,
-      categoryId: electronics.id,
-      sellerId: merchantId,
-      images: [
-        "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&h=800&fit=crop",
-      ],
-      ratingAvg: 4.4,
-      ratingCount: 1,
-    },
-    {
-      name: "Nimbus Smart Watch",
-      slug: "nimbus-smart-watch",
-      description:
-        "Lightweight smart watch with bright always-on display, multi-day battery, heart-rate tracking, and seamless phone notifications.",
-      price: 299,
-      compareAt: 349,
-      stock: 36,
-      sku: "NIM-SW-07",
+        "Full-touch smartwatch with health monitoring (heart rate, SpO2, sleep tracking), 7-day battery, and compatibility with Android and iOS notifications.",
+      price: 22000,
+      compareAt: 29500,
+      stock: 85,
+      sku: "AFC-SW-002",
       featured: true,
       categoryId: electronics.id,
       sellerId: merchantId,
@@ -205,174 +198,181 @@ async function main() {
         "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=800&fit=crop",
         "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&h=800&fit=crop",
       ],
-      ratingAvg: 4.5,
-      ratingCount: 1,
+      ratingAvg: 4.4,
+      ratingCount: 2,
     },
     {
-      name: "Lumen Desk Lamp",
-      slug: "lumen-desk-lamp",
+      name: "Mechanical Gaming Keyboard",
+      slug: "mechanical-gaming-keyboard",
       description:
-        "A sculptural LED desk lamp with warm-to-cool temperature control, USB-C charging, and a matte aluminum finish that disappears into any workspace.",
-      price: 129,
-      compareAt: 159,
-      stock: 72,
-      sku: "LUM-DL-02",
-      featured: true,
-      categoryId: home.id,
-      sellerId,
-      images: [
-        "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&h=800&fit=crop",
-      ],
-      ratingAvg: 4.5,
-      ratingCount: 1,
-    },
-    {
-      name: "Ceramic Pour-Over Set",
-      slug: "ceramic-pour-over-set",
-      description:
-        "Hand-glazed ceramic pour-over dripper and mug set. Thermal-stable clay body keeps your brew at the right temperature from first pour to last sip.",
-      price: 68,
-      compareAt: 82,
-      stock: 110,
-      sku: "CER-PO-04",
-      featured: true,
-      categoryId: home.id,
-      sellerId,
-      images: [
-        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=800&fit=crop",
-      ],
-      ratingAvg: 4.8,
-      ratingCount: 1,
-    },
-    {
-      name: "Nordic Linen Throw",
-      slug: "nordic-linen-throw",
-      description:
-        "Stonewashed European linen throw with soft drape and breathable warmth — made for sofas, beds, and cool evenings.",
-      price: 89,
-      stock: 64,
-      sku: "NOR-LT-08",
+        "87-key tenkeyless mechanical keyboard with RGB backlight, blue tactile switches, aluminium body, and USB-C detachable cable.",
+      price: 16800,
+      stock: 60,
+      sku: "AFC-KB-003",
       featured: false,
-      categoryId: home.id,
-      sellerId,
+      categoryId: electronics.id,
+      sellerId: merchantId,
       images: [
-        "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&h=800&fit=crop",
-      ],
-      ratingAvg: 0,
-      ratingCount: 0,
-    },
-    {
-      name: "Meridian Wool Coat",
-      slug: "meridian-wool-coat",
-      description:
-        "A tailored wool-blend coat with a clean silhouette, hidden buttons, and a soft brushed lining designed for all-day wear through cooler seasons.",
-      price: 320,
-      stock: 24,
-      sku: "MER-WC-03",
-      featured: true,
-      categoryId: clothing.id,
-      sellerId,
-      images: [
-        "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=800&h=800&fit=crop",
-      ],
-      ratingAvg: 5,
-      ratingCount: 1,
-    },
-    {
-      name: "Atlas Organic Tee",
-      slug: "atlas-organic-tee",
-      description:
-        "Heavyweight organic cotton tee with a relaxed fit, reinforced seams, and a soft hand-feel that gets better with every wash.",
-      price: 42,
-      compareAt: 52,
-      stock: 180,
-      sku: "ATL-OT-09",
-      featured: true,
-      categoryId: clothing.id,
-      sellerId,
-      images: [
-        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&h=800&fit=crop",
       ],
       ratingAvg: 4.3,
       ratingCount: 1,
     },
     {
-      name: "Harbor Chino Pants",
-      slug: "harbor-chino-pants",
+      name: "65W USB-C GaN Charger",
+      slug: "usb-c-gan-charger-65w",
       description:
-        "Stretch chino pants with a tapered leg, deep pockets, and a mid-rise waist — polished enough for the office, easy enough for weekends.",
-      price: 98,
-      stock: 90,
-      sku: "HAR-CP-10",
+        "Compact GaN fast charger with three ports (2x USB-C, 1x USB-A). Supports 65W PD for laptops, 30W for phones, and charges three devices simultaneously.",
+      price: 9500,
+      compareAt: 12000,
+      stock: 200,
+      sku: "AFC-CHG-004",
       featured: false,
-      categoryId: clothing.id,
+      categoryId: electronics.id,
       sellerId,
       images: [
-        "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&h=800&fit=crop",
       ],
-      ratingAvg: 0,
-      ratingCount: 0,
+      ratingAvg: 4.7,
+      ratingCount: 2,
+    },
+    // Home & Kitchen
+    {
+      name: "Rechargeable LED Desk Fan",
+      slug: "rechargeable-led-desk-fan",
+      description:
+        "Portable 3-speed desk fan with a 4000mAh rechargeable battery, 8-hour runtime, built-in LED night light, and ultra-quiet operation ideal for offices and bedrooms.",
+      price: 12500,
+      compareAt: 15000,
+      stock: 95,
+      sku: "AFC-FAN-005",
+      featured: true,
+      categoryId: homeKitchen.id,
+      sellerId,
+      images: [
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=800&fit=crop",
+      ],
+      ratingAvg: 4.5,
+      ratingCount: 2,
     },
     {
-      name: "Field Leather Belt",
-      slug: "field-leather-belt",
+      name: "Stainless Steel Water Bottle 1L",
+      slug: "stainless-steel-water-bottle-1l",
       description:
-        "Full-grain leather belt with a brushed brass buckle. Ages beautifully and holds its shape season after season.",
-      price: 58,
-      stock: 140,
-      sku: "FLD-LB-11",
+        "Double-wall vacuum-insulated 1-litre bottle. Keeps drinks cold for 24 hours and hot for 12 hours. Leak-proof lid and BPA-free.",
+      price: 5800,
+      stock: 300,
+      sku: "AFC-BTL-006",
       featured: false,
-      categoryId: accessories.id,
+      categoryId: homeKitchen.id,
       sellerId,
+      images: [
+        "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&h=800&fit=crop",
+      ],
+      ratingAvg: 4.8,
+      ratingCount: 1,
+    },
+    {
+      name: "Electric Pressure Cooker 6L",
+      slug: "electric-pressure-cooker-6l",
+      description:
+        "6-litre multi-function electric pressure cooker with 12 cooking presets, delayed start, keep-warm, and a stainless-steel inner pot designed for Nigerian staple dishes.",
+      price: 38000,
+      compareAt: 45000,
+      stock: 40,
+      sku: "AFC-POT-007",
+      featured: true,
+      categoryId: homeKitchen.id,
+      sellerId,
+      images: [
+        "https://images.unsplash.com/photo-1585515320310-259814833e62?w=800&h=800&fit=crop",
+      ],
+      ratingAvg: 4.6,
+      ratingCount: 2,
+    },
+    // Fashion
+    {
+      name: "Men's Casual Polo Shirt",
+      slug: "mens-casual-polo-shirt",
+      description:
+        "Breathable pique cotton polo shirt available in multiple colours. Slim fit, reinforced collar, and UV protective fabric designed for warm climates.",
+      price: 7500,
+      compareAt: 9500,
+      stock: 250,
+      sku: "AFC-POLO-008",
+      featured: false,
+      categoryId: fashion.id,
+      sellerId,
+      images: [
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&h=800&fit=crop",
+      ],
+      ratingAvg: 4.2,
+      ratingCount: 1,
+    },
+    {
+      name: "Women's Ankara Print Dress",
+      slug: "womens-ankara-print-dress",
+      description:
+        "Bold Ankara-print midi dress with a fitted bodice, A-line skirt, and side pockets. Machine washable and wrinkle-resistant for everyday elegance.",
+      price: 14000,
+      compareAt: 18000,
+      stock: 80,
+      sku: "AFC-DRESS-009",
+      featured: true,
+      categoryId: fashion.id,
+      sellerId,
+      images: [
+        "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&h=800&fit=crop",
+      ],
+      ratingAvg: 4.9,
+      ratingCount: 2,
+    },
+    // Bags & Accessories
+    {
+      name: "Waterproof Backpack 30L",
+      slug: "waterproof-backpack-30l",
+      description:
+        "30-litre waterproof backpack with a padded 15.6in laptop compartment, USB charging port, anti-theft rear pocket, and ergonomic straps.",
+      price: 19500,
+      compareAt: 25000,
+      stock: 110,
+      sku: "AFC-BAG-010",
+      featured: true,
+      categoryId: bagsAcc.id,
+      sellerId: merchantId,
       images: [
         "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&h=800&fit=crop",
       ],
-      ratingAvg: 4.6,
-      ratingCount: 1,
+      ratingAvg: 4.7,
+      ratingCount: 2,
     },
     {
-      name: "Cascade Canvas Tote",
-      slug: "cascade-canvas-tote",
+      name: "Polarized Aviator Sunglasses",
+      slug: "polarized-aviator-sunglasses",
       description:
-        "Structured canvas tote with leather handles, interior laptop sleeve, and a magnetic closure — your everyday carry, elevated.",
-      price: 75,
-      compareAt: 95,
-      stock: 88,
-      sku: "CAS-CT-12",
-      featured: true,
-      categoryId: accessories.id,
-      sellerId: merchantId,
-      images: [
-        "https://images.unsplash.com/photo-1591561954557-26941169b49e?w=800&h=800&fit=crop",
-      ],
-      ratingAvg: 4.9,
-      ratingCount: 1,
-    },
-    {
-      name: "Horizon Aviator Sunglasses",
-      slug: "horizon-aviator-sunglasses",
-      description:
-        "Polarized aviator sunglasses with lightweight metal frames, UV400 lenses, and a soft-touch case included.",
-      price: 120,
-      stock: 70,
-      sku: "HOR-AS-13",
+        "UV400 polarized aviator sunglasses with lightweight alloy frames, anti-glare lenses, and a microfibre cleaning pouch included.",
+      price: 8200,
+      stock: 150,
+      sku: "AFC-SUN-011",
       featured: false,
-      categoryId: accessories.id,
-      sellerId: merchantId,
+      categoryId: bagsAcc.id,
+      sellerId,
       images: [
         "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800&h=800&fit=crop",
       ],
       ratingAvg: 0,
       ratingCount: 0,
     },
+    // Beauty & Personal Care
     {
-      name: "Solstice Face Serum",
-      slug: "solstice-face-serum",
+      name: "Vitamin C Face Serum 30ml",
+      slug: "vitamin-c-face-serum-30ml",
       description:
-        "Lightweight daily serum with niacinamide and squalane. Absorbs quickly, layers well under moisturizer, and supports a calm, even-looking complexion.",
-      price: 48,
-      stock: 200,
-      sku: "SOL-FS-06",
+        "Brightening daily serum with 15% stabilised Vitamin C, hyaluronic acid, and niacinamide. Lightweight, fast-absorbing, and suitable for all skin tones.",
+      price: 11000,
+      compareAt: 14500,
+      stock: 180,
+      sku: "AFC-SER-012",
       featured: true,
       categoryId: beauty.id,
       sellerId,
@@ -380,10 +380,62 @@ async function main() {
         "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&h=800&fit=crop",
       ],
       ratingAvg: 4.6,
+      ratingCount: 2,
+    },
+    {
+      name: "Hair Growth Oil 100ml",
+      slug: "hair-growth-oil-100ml",
+      description:
+        "Nourishing hair growth oil with castor oil, rosemary extract, and biotin. Reduces breakage, promotes thickness, and suitable for natural and relaxed hair.",
+      price: 6500,
+      stock: 220,
+      sku: "AFC-HAIR-013",
+      featured: false,
+      categoryId: beauty.id,
+      sellerId,
+      images: [
+        "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=800&h=800&fit=crop",
+      ],
+      ratingAvg: 4.5,
+      ratingCount: 1,
+    },
+    // Industrial & Tools
+    {
+      name: "Cordless Power Drill 18V",
+      slug: "cordless-power-drill-18v",
+      description:
+        "18V cordless drill/driver with 2-speed gearbox, 20 torque settings, LED work light, and two 2Ah Li-ion batteries with rapid charger. Suitable for wood, metal, and masonry.",
+      price: 45000,
+      compareAt: 56000,
+      stock: 35,
+      sku: "AFC-DRILL-014",
+      featured: true,
+      categoryId: industrial.id,
+      sellerId,
+      images: [
+        "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=800&fit=crop",
+      ],
+      ratingAvg: 4.8,
+      ratingCount: 1,
+    },
+    {
+      name: "Digital Multimeter",
+      slug: "digital-multimeter",
+      description:
+        "Auto-ranging digital multimeter with AC/DC voltage, current, resistance, continuity, and diode testing. Includes test leads and a protective holster.",
+      price: 8800,
+      stock: 90,
+      sku: "AFC-MULTI-015",
+      featured: false,
+      categoryId: industrial.id,
+      sellerId,
+      images: [
+        "https://images.unsplash.com/photo-1609429019995-8c40f49535a5?w=800&h=800&fit=crop",
+      ],
+      ratingAvg: 4.4,
       ratingCount: 1,
     },
   ];
-
   const products = await Promise.all(
     catalog.map((item) =>
       prisma.product.create({
@@ -402,90 +454,164 @@ async function main() {
         userId: customer.id,
         productId: products[0].id,
         rating: 5,
-        title: "Studio-ready clarity",
+        title: "Crystal clear sound",
         comment:
-          "Comfortable for long sessions and the noise control is genuinely useful on flights.",
+          "Noise cancellation works great on Lagos traffic. Battery lasts all day.",
       },
       {
         userId: admin.id,
         productId: products[0].id,
         rating: 4,
-        title: "Great daily driver",
-        comment: "Battery life is excellent. Wish the case was a bit slimmer.",
+        title: "Solid value",
+        comment: "Great for the price. Case charges quickly.",
+      },
+      {
+        userId: sellerUser.id,
+        productId: products[0].id,
+        rating: 5,
+        title: "Best earbuds I have owned",
+        comment: "Fit is comfortable even for long listening sessions.",
       },
       {
         userId: customer.id,
         productId: products[1].id,
+        rating: 5,
+        title: "Battery life is impressive",
+        comment: "7 days on a single charge — exactly as advertised.",
+      },
+      {
+        userId: admin.id,
+        productId: products[1].id,
         rating: 4,
-        title: "Solid travel board",
-        comment: "Quiet enough for the office and packs easily.",
+        title: "Great daily companion",
+        comment: "Health tracking is accurate and notifications are reliable.",
       },
       {
         userId: customer.id,
         productId: products[2].id,
-        rating: 5,
-        title: "Battery lasts days",
-        comment: "Display is crisp outdoors. Tracking feels accurate.",
+        rating: 4,
+        title: "Great typing feel",
+        comment: "Tactile feedback is satisfying. RGB is a bonus.",
       },
       {
         userId: customer.id,
         productId: products[3].id,
         rating: 5,
-        title: "Perfect task light",
-        comment: "The temperature range is spot on for evening writing.",
+        title: "Charges my laptop and phone at once",
+        comment: "Compact and powerful. No more carrying a bulky adapter.",
+      },
+      {
+        userId: admin.id,
+        productId: products[3].id,
+        rating: 5,
+        title: "A must-have accessory",
+        comment: "Fast charging is legit. Works with MacBook and Samsung.",
       },
       {
         userId: customer.id,
         productId: products[4].id,
         rating: 5,
-        title: "Morning ritual upgrade",
-        comment: "Beautiful glaze and consistent pour. Highly recommend.",
+        title: "Perfect for NEPA situations",
+        comment:
+          "Runs for 8 hours on a charge. Very quiet. LED nightlight is a bonus.",
+      },
+      {
+        userId: admin.id,
+        productId: products[4].id,
+        rating: 4,
+        title: "Good airflow",
+        comment: "Strong on highest setting. Battery charges fast.",
+      },
+      {
+        userId: customer.id,
+        productId: products[5].id,
+        rating: 5,
+        title: "Keeps water cold all day",
+        comment: "Still cold after 6 hours under Lagos sun. Very impressed.",
       },
       {
         userId: customer.id,
         productId: products[6].id,
         rating: 5,
-        title: "Impeccable fit",
-        comment: "Structure without stiffness. Looks expensive because it is.",
+        title: "Cooks jollof rice perfectly",
+        comment: "Rice preset is well calibrated. Pot is easy to clean.",
+      },
+      {
+        userId: admin.id,
+        productId: products[6].id,
+        rating: 4,
+        title: "Reliable kitchen appliance",
+        comment: "Beans in 25 minutes. No more soaking overnight.",
       },
       {
         userId: customer.id,
-        productId: products[7].id,
-        rating: 4,
-        title: "Great everyday tee",
-        comment: "Thick fabric that still breathes. True to size.",
+        productId: products[8].id,
+        rating: 5,
+        title: "Beautiful fabric and cut",
+        comment: "The print quality is vibrant. Received so many compliments.",
+      },
+      {
+        userId: admin.id,
+        productId: products[8].id,
+        rating: 5,
+        title: "Quality stitching",
+        comment: "Washed twice and colour is still as bold. Great value.",
       },
       {
         userId: customer.id,
         productId: products[9].id,
         rating: 5,
-        title: "Quality leather",
-        comment: "Stitching is clean and the buckle feels substantial.",
+        title: "Fits everything I need",
+        comment:
+          "Laptop, charger, files — all fits. The USB port is super handy.",
+      },
+      {
+        userId: admin.id,
+        productId: products[9].id,
+        rating: 4,
+        title: "Sturdy and practical",
+        comment: "Waterproofing actually works. Survived a downpour.",
       },
       {
         userId: customer.id,
-        productId: products[10].id,
+        productId: products[11].id,
         rating: 5,
-        title: "Carry everything",
-        comment: "Laptop sleeve is perfect. Holds its shape all day.",
+        title: "Skin visibly brighter in 2 weeks",
+        comment: "No irritation, absorbs quickly. Already on my second bottle.",
+      },
+      {
+        userId: admin.id,
+        productId: products[11].id,
+        rating: 4,
+        title: "Good formulation",
+        comment: "Layers well under sunscreen. No sticky residue.",
       },
       {
         userId: customer.id,
-        productId: products[12].id,
+        productId: products[13].id,
         rating: 5,
-        title: "Clean formula",
-        comment: "No stickiness, plays well with sunscreen.",
+        title: "More power than expected",
+        comment: "Drills through concrete easily. Battery lasts a full session.",
+      },
+      {
+        userId: customer.id,
+        productId: products[14].id,
+        rating: 4,
+        title: "Accurate readings",
+        comment: "Used it to diagnose a wiring fault. Very reliable.",
       },
     ],
   });
 
   console.log("✅ Seed complete");
-  console.log(`  ${categories.length} categories · ${products.length} products`);
+  console.log(
+    `  ${categories.length} categories · ${products.length} products · 21 reviews`
+  );
   console.log("Accounts (password: password123):");
-  console.log("  admin@shopsphere.com");
-  console.log("  seller@shopsphere.com");
-  console.log("  merchant@shopsphere.com");
-  console.log("  customer@shopsphere.com");
+  console.log("  admin@shopsphere.com    → SUPER_ADMIN");
+  console.log("  seller@shopsphere.com   → STAFF (Africhina Warehouse)");
+  console.log("  merchant@shopsphere.com → STAFF (Africhina Tech Hub)");
+  console.log("  customer@shopsphere.com → CUSTOMER (Chidi Okonkwo, Lagos)");
 }
 
 main()

@@ -4,11 +4,13 @@ export function generateOrderNumber() {
   return `AFC-${stamp}-${rand}`;
 }
 
-export function formatCurrency(amount: number | string, currency = "USD") {
+export function formatCurrency(amount: number | string, currency = "NGN") {
   const value = typeof amount === "string" ? parseFloat(amount) : amount;
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("en-NG", {
     style: "currency",
     currency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(value);
 }
 

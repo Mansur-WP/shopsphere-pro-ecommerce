@@ -1,7 +1,7 @@
-/** Shared commerce pricing rules (cart, checkout, orders) */
-export const FREE_SHIPPING_THRESHOLD = 75;
-export const SHIPPING_FLAT = 9.99;
-export const TAX_RATE = 0.08;
+/** Shared commerce pricing rules (cart, checkout, orders) — values in NGN */
+export const FREE_SHIPPING_THRESHOLD = 50_000; // ₦50,000 qualifies for free shipping
+export const SHIPPING_FLAT = 2_500;            // ₦2,500 flat shipping fee
+export const TAX_RATE = 0;                     // VAT included in listed prices for V1
 
 export function calcShipping(subtotal: number): number {
   if (subtotal <= 0) return 0;

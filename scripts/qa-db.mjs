@@ -220,15 +220,26 @@ async function main() {
   let brokenImages = 0;
   for (const p of products) {
     for (const url of p.images) {
-      try {
-        const res = await fetch(url, { method: "HEAD", signal: AbortSignal.timeout(8000) });
-        if (!res.ok) {
-          brokenImages++;
-          console.log(`⚠ Broken image (${p.slug}): HTTP ${res.status} ${url}`);
+      let okImage = false;
+      for (let attempt = 0; attempt < 2 && !okImage; attempt++) {
+        try {
+          const res = await fetch(url, {
+            method: "HEAD",
+            headers: { "User-Agent": "Mozilla/5.0" },
+            signal: AbortSignal.timeout(12000),
+          });
+          if (res.ok) {
+            okImage = true;
+          } else if (attempt === 1) {
+            brokenImages++;
+            console.log(`⚠ Broken image (${p.slug}): HTTP ${res.status} ${url}`);
+          }
+        } catch (err) {
+          if (attempt === 1) {
+            brokenImages++;
+            console.log(`⚠ Broken image (${p.slug}): fetch failed ${url} - ${err.message || err}`);
+          }
         }
-      } catch {
-        brokenImages++;
-        console.log(`⚠ Broken image (${p.slug}): fetch failed ${url}`);
       }
     }
   }

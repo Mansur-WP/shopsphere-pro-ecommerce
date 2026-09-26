@@ -112,9 +112,9 @@ export function LoginForm({ callbackUrl }: LoginFormProps) {
           <div className="rounded-xl border border-border/60 bg-muted/40 p-3 text-xs text-muted-foreground">
             <p className="mb-1 font-medium text-foreground">Demo accounts</p>
             <p className="space-y-0.5">
-              <span><strong>Super Admin:</strong> admin@africhina.com</span><br/>
-              <span><strong>Staff:</strong> staff@africhina.com</span><br/>
-              <span><strong>Customer:</strong> customer@africhina.com</span>
+              <span><strong>Super Admin:</strong> admin@shopsphere.com</span><br/>
+              <span><strong>Staff:</strong> seller@shopsphere.com</span><br/>
+              <span><strong>Customer:</strong> customer@shopsphere.com</span>
             </p>
             <p className="mt-1.5 text-foreground/80 font-mono">Password: password123</p>
           </div>

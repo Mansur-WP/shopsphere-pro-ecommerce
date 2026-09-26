@@ -139,7 +139,7 @@ async function main() {
     log("FAIL", "Customer login", JSON.stringify(customer.session));
   }
 
-  await checkRoute("/profile", { jar: customer.jar, contains: ["Profile", "Alex"] });
+  await checkRoute("/profile", { jar: customer.jar, contains: ["Profile", "Chidi"] });
   await checkRoute("/orders", { jar: customer.jar, contains: ["Orders"] });
   await checkRoute("/checkout", { jar: customer.jar, contains: ["Checkout"] });
 
