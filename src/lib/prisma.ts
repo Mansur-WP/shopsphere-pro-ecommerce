@@ -14,10 +14,16 @@ function createPrismaClient() {
     throw new Error("DATABASE_URL is not set");
   }
 
+  const isRemote =
+    !connectionString.includes("localhost") &&
+    !connectionString.includes("127.0.0.1") &&
+    !connectionString.includes("host.docker.internal");
+
   const pool =
     globalForPrisma.pgPool ??
     new Pool({
       connectionString,
+      ssl: isRemote ? { rejectUnauthorized: false } : undefined,
     });
 
   if (process.env.NODE_ENV !== "production") {
@@ -40,3 +46,4 @@ export const prisma = globalForPrisma.prisma ?? createPrismaClient();
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;
 }
+
